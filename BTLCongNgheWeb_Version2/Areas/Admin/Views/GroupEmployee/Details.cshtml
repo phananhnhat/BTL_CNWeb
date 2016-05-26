@@ -1,0 +1,329 @@
+﻿@model BTLCongNgheWeb_Version2.Entity.GroupEmployee
+@using BTLCongNgheWeb_Version2.Dao
+@using BTLCongNgheWeb_Version2.Entity
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+@section Link {
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">Quản trị</a>
+        </li>
+
+        <li>
+            <a href="#">Nhóm nhân viên</a>
+        </li>
+        <li>
+            <a href="#">Danh sách nhóm</a>
+        </li>
+        <li class="active">Chi tiết</li>
+    </ul><!-- /.breadcrumb -->
+}
+
+
+
+<hr />
+<div class="form-horizontal">
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GroupName, "Tên nhóm", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.GroupName, new { @class = "col-xs-10 col-sm-4", @readonly = "" })
+            @Html.ValidationMessageFor(model => model.GroupName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Note, "Ghi chú", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Note, new { @class = "col-xs-10 col-sm-6", @readonly = "" })
+            @Html.ValidationMessageFor(model => model.Note)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Quyền truy cập", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <table class="table">
+                <tr>
+                    <td>
+                        Sản phẩm
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                bool status_checkbox = false;
+                                AuthorizationDao au_dao = new AuthorizationDao();
+                                if (au_dao.FindAuthorization(Model.ID, 1) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc1", @status_checkbox, new { @disabled = "disabled" }) Xem
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 2) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc2", @status_checkbox, new { @disabled = "disabled" }) Thêm sản phẩm
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 3) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc3", @status_checkbox, new { @disabled = "disabled" }) Sửa
+                        </label>
+
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 4) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc4", @status_checkbox, new { @disabled = "disabled" }) Xóa
+                        </label>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Danh mục sản phẩm
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 5) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc5", @status_checkbox, new { @disabled = "disabled" }) Xem danh mục
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 6) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc6", @status_checkbox, new { @disabled = "disabled" }) Thêm
+                        </label>
+
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 7) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc7", @status_checkbox, new { @disabled = "disabled" }) Sửa
+                        </label>
+
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 8) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc8", @status_checkbox, new { @disabled = "disabled" }) Xóa
+                        </label>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Hóa đơn
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 9) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc9", @status_checkbox, new { @disabled = "disabled" })  Xem danh sách
+                        </label>
+
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 10) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc10", @status_checkbox, new { @disabled = "disabled" }) Xem thông tin
+                        </label>
+
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 11) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc11", @status_checkbox, new { @disabled = "disabled" }) Xác nhận
+                        </label>
+
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 12) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc12", @status_checkbox, new { @disabled = "disabled" }) Hủy bỏ giao dịch
+                        </label>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Tài khoản nhân viên
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 13) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc13", @status_checkbox, new { @disabled = "disabled" }) Xem danh sách
+                        </label>
+
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 14) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc14", @status_checkbox, new { @disabled = "disabled" }) Tạo tài khoản
+                        </label>
+
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 15) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc15", @status_checkbox, new { @disabled = "disabled" }) Xem thông tin
+                        </label>
+
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 16) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc16", @status_checkbox, new { @disabled = "disabled" }) Xóa
+                        </label>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Nhóm nhân viên
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 17) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc17", @status_checkbox, new { @disabled = "disabled" }) Xem danh sách
+                        </label>
+
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 18) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc18", @status_checkbox, new { @disabled = "disabled" }) Thêm nhóm nhân viên
+                        </label>
+
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 19) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc19", @status_checkbox, new { @disabled = "disabled" }) Sửa
+                        </label>
+
+                    </td>
+                    <td>
+                        <label>
+                            @{
+                                if (au_dao.FindAuthorization(Model.ID, 20) == 1)
+                                { status_checkbox = true; }
+                                else
+                                { status_checkbox = false; }
+                            }
+                            @Html.CheckBox("acc20", @status_checkbox, new { @disabled = "disabled" }) Xóa
+                        </label>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            @Html.ActionLink("Sửa thông tin", "Edit", new { id = Model.ID }, new { @class = "btn btn-info" })
+        </div>
+    </div>
+
+</div>
+
+<p>
+    @Html.ActionLink("Quay lại", "List", new { id = Model.ID })
+</p>

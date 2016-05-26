@@ -1,0 +1,16 @@
+﻿@model IEnumerable<BTLCongNgheWeb_Version2.Entity.CF_Products_Categories>
+@using BTLCongNgheWeb_Version2.Entity
+@using BTLCongNgheWeb_Version2.Dao
+@{
+    ViewBag.Title = "View1";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+@{
+    ProductDao pro = new ProductDao();
+}
+@foreach(var list in Model)
+{
+ 
+    string pro_name = pro.GetNameProductByID((int)list.ProductID);
+    <p> @pro_name </p>
+}

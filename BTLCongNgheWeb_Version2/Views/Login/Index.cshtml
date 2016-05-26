@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+@using (Html.BeginForm("Index", "Login"))
+{
+    <fieldset>
+        <label class="block clearfix">
+            <span class="block input-icon input-icon-right">
+                @Html.TextBox("name",null, new { @class = "form-control", @placeholder = "Username" })
+                <i class="ace-icon fa fa-user"></i>
+            </span>
+        </label>
+
+        <label class="block clearfix">
+            <span class="block input-icon input-icon-right">
+                @Html.Password("password",null, new { @class = "form-control", @placeholder = "Password" })
+                <i class="ace-icon fa fa-lock"></i>
+            </span>
+        </label>
+
+        <div class="space"></div>
+
+        <div class="clearfix">
+            <label class="inline">
+                <input type="checkbox" class="ace" />
+                <span class="lbl"> Ghi nhớ</span>
+            </label>
+            <input type="submit" class="width-35 pull-right btn btn-sm btn-primary" value="Đăng nhập" />
+            @*<button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+                <i class="ace-icon fa fa-key"></i>
+                <span class="bigger-110">Login</span>
+            </button>*@
+        </div>
+
+        <div class="space-4"></div>
+    </fieldset>
+}
+@Html.ValidationMessage("loitaikhoan")
+
+@*<div>@Html.Label("Login name")</div>
+<div>@Html.TextBox("name")</div>
+<div>@Html.Label("Password")</div>
+<div>@Html.TextBox("password")</div>
+<input type="submit" value="Đăng nhập" />*@

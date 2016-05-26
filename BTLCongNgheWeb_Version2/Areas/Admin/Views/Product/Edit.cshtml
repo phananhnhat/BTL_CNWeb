@@ -1,0 +1,305 @@
+﻿@model BTLCongNgheWeb_Version2.Entity.Product
+@using BTLCongNgheWeb_Version2.Dao
+@using BTLCongNgheWeb_Version2.Entity
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+@section jsfooter
+{
+
+    @{
+        var strValueFull = "";
+        foreach (ProductImage j in ViewBag.Image)
+        {
+            strValueFull = strValueFull + j.URLImage.ToString() + ",";
+        }
+    }
+
+    <script>
+        var strForm = "";
+        var idImage = 1000;
+        //var idBtnDelete = 1000000;
+        var j = 0;
+        var mang = [""];
+        var mangSkin = [""];
+        var mangStyleBtnDelete = [""];
+
+        var objImage = [{
+            idBtnDeleteaaa: "",
+            srcaaa: ""
+        }];
+        var strmmm = "";
+        strmmm = "@strValueFull";
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+
+            finder.selectActionFunction = function (url) {
+                mang.push(url);
+                mangSkin.push("margin-top: 15px;width: 200px;");
+                mangStyleBtnDelete.push("display : normal;");
+
+
+
+                strForm = strForm + "<div class='col-xs-4 col-sm-4'><img id='" + idImage + "' src='" + mang[j + 1] + "' style='" + mangSkin[j + 1] + "'></div>";
+                document.getElementById("formImage").innerHTML = strForm;
+                document.getElementById(idImage).src = mang[j + 1];
+                document.getElementById(idImage).style = mangSkin[j + 1];
+                //document.getElementById(idBtnDelete).style = mangStyleBtnDelete[j + 1];
+                //window.onload = function () {
+
+                //    document.getElementById(idBtnDelete).onclick = readPage;
+                //}
+
+                strmmm = strmmm + url + ",";
+                var inChuoi = strmmm.substring(0, strmmm.length - 1);
+                idImage++;
+                //idBtnDelete++;
+                j++;
+                $('#URL').val(inChuoi);
+            }
+
+            finder.popup();
+        });
+
+    </script>
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">EDIT PRODUCT</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+@using (Html.BeginForm("EditAction", "Product"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Product</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NameProduct, "TÊN SẢN PHẨM", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.NameProduct)
+                @Html.ValidationMessageFor(model => model.NameProduct)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FullNameProduct, "TÊN SẢN PHẨM ĐẦY ĐỦ", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.FullNameProduct)
+                @Html.ValidationMessageFor(model => model.FullNameProduct)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, "GIÁ", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Price)
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.News, "HÀNG MỚI?", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.News)
+                @Html.ValidationMessageFor(model => model.News)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sale, "KHUYẾN MÃI?", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Sale)
+                @Html.ValidationMessageFor(model => model.Sale)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PriceSale, "GIÁ KHUYẾN MÃI", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.PriceSale)
+                @Html.ValidationMessageFor(model => model.PriceSale)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Color, "MÀU SẮC", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Color)
+                @Html.ValidationMessageFor(model => model.Color)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Size, "KÍCH CỠ", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Size)
+                @Html.ValidationMessageFor(model => model.Size)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Maker, "NHÀ SẢN XUẤT", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Maker)
+                @Html.ValidationMessageFor(model => model.Maker)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, "MIÊU TẢ", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Note, "GHI CHÚ", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Note)
+                @Html.ValidationMessageFor(model => model.Note)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Actives, "KÍCH HOẠT", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Actives)
+                @Html.ValidationMessageFor(model => model.Actives)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Category", "DANH MỤC SẢN PHẨM", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+
+                @{
+                    <select id="Category" multiple="multiple" name="Category">
+                        @foreach (Category c in @ViewBag.Category)
+                        {
+                            <option id="@c.ID" value="@c.ID">@c.Name</option>
+                        }
+                    </select>
+    foreach (Category c in @ViewBag.Category)
+    {
+        foreach (CF_Products_Categories cf_cats in @ViewBag.CF_Category)
+        {
+            if (cf_cats.CategoriesID == c.ID)
+            {
+                <script>
+                    document.getElementById("@c.ID").selected = "@c.ID";
+                </script>
+            }
+        }
+    }
+                }
+
+            </div>
+        </div>
+        <div class="form-group">
+            @if (ViewBag.Image != null)
+            {
+                @Html.Label("URL", "THÊM ẢNH", new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-9">
+                    @{
+                var strValueFull = "";
+                foreach (ProductImage j in ViewBag.Image)
+                {
+                    strValueFull = strValueFull + j.URLImage.ToString() + ",";
+                }
+                var strValue = strValueFull.Substring(0, strValueFull.Length - 1);
+                    }
+                    <input class="col-xs-10 col-sm-8" id="URL" name="URL" type="text" value="@strValue" readonly="readonly">
+                    <div class="col-md-12 col-sm-8">
+                        <div>
+                            @{
+
+                foreach (ProductImage i in ViewBag.Image)
+                {
+                    <div class="col-xs-4 col-sm-4">
+                        <img id="@i.ID" src="@i.URLImage" style="margin-top: 15px;width: 200px;">
+                        @*<a id="delete_@i.ID" href="#">Hủy</a>*@
+                    </div>
+                }
+                <div id="formImage">
+
+                </div>
+                                @*<script>
+                                        function readForDelete(url, strValuef) {
+                                            var strValueff = "";
+                                            strValueff = strValueff + strValuef;
+                                            var timKiemForDelete = strValueff.indexOf(url);
+                                            var strValue1 = strValueff.substring(0, timKiemForDelete);
+                                            var strValue2 = strValueff.substring(timKiemForDelete + url.length + 1);
+                                            var strValue3 = strValue1 + strValue2;
+                                            strValueff = "";
+                                            strValueff = strValue3.substring(0, strValue3.length - 1);
+
+                                            document.getElementById("URL").value = strValueff;
+                                        }
+                                    </script>
+                                    var strValueFull2 = "";
+                                    foreach (ProductImage j2 in ViewBag.Image)
+                                    {
+                                        strValueFull2 = strValueFull2 + j2.URLImage.ToString() + ",";
+                                    }
+                                    var strValue2 = strValueFull2.Substring(0, strValueFull2.Length - 1);
+                                    foreach (ProductImage k in ViewBag.Image)
+                                    {
+
+                                        <script>
+                                                window.onload = function () {
+                                                    document.getElementById("delete_@k.ID").onclick = readForDelete("@k.URLImage", "@strValue2");
+                                                }
+                                        </script>
+                                    }*@
+                            }
+                        </div>
+                        <div class="col-xs-12 col-sm-12">
+                            <a id="btnSelectImage" href="#">Thêm ảnh</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (ViewBag.Image == null)
+            {
+                @Html.Label("URL", "CHỌN ẢNH", new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-9">
+                    <input class="col-xs-10 col-sm-8" id="URL" name="URL" type="text" value="" readonly="readonly">
+                    <div class="col-md-12 col-sm-8">
+                        <div id="formImage">
+
+                        </div>
+                        <div class="col-xs-12 col-sm-12">
+                            <a id="btnSelectImage" href="#">Thêm ảnh</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            }
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-sm-9">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>
+
+
+

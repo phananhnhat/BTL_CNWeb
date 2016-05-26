@@ -1,0 +1,17 @@
+﻿@using BTLCongNgheWeb_Version2.Models;
+<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+    <img class="nav-user-photo" src="/assets/avatars/user.jpg" alt="Jason's Photo">
+    <span class="user-info">
+        <small>Xin chào,</small>
+        @{
+            UserLogin use = new UserLogin();
+            use = (UserLogin)Session["UserLogin"];
+            if (use != null)
+            {
+                @use.Name
+            }
+        }
+    </span>
+
+    <i class="ace-icon fa fa-caret-down"></i>
+</a>

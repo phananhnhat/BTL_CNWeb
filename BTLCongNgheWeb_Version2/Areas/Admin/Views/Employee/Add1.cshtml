@@ -1,0 +1,104 @@
+﻿@model BTLCongNgheWeb_Version2.Entity.Employee
+@using BTLCongNgheWeb_Version2.Dao
+@using BTLCongNgheWeb_Version2.Entity
+@{
+    ViewBag.Title = "Add1";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Add</h2>
+
+@using (Html.BeginForm("AddAction", "Employee"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Employee</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.Label("Type", "Kiểu nhân viên", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Type")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Name", "Tên ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Name")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Address", "Địa chỉ ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Address")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("NumberPhone", "Số điện thoại ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("NumberPhone")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Email", "Email ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Email")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Login", "Tên đăng nhập ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Login")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Password", "Mật khẩu ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Password")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("PasswordLevel2", "Mật khẩu cấp 2", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("PasswordLevel2")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("PasswordLevel2", "Mật khẩu cấp 2", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("PasswordLevel2")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("GroupEmployee", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @{
+    GroupEmployeeDao group_em = new GroupEmployeeDao();
+    IEnumerable<GroupEmployee> list = group_em.List();
+    SelectList select = new SelectList(list, "ID", "GroupName");
+                }
+                @Html.ListBox("GroupEmployee", select)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

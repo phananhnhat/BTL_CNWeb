@@ -1,0 +1,23 @@
+﻿@using BTLCongNgheWeb_Version2.Dao
+@using BTLCongNgheWeb_Version2.Entity
+@model IEnumerable<BTLCongNgheWeb_Version2.Entity.Category>
+@{
+    //CategoryDao
+    //IEnumerable<Category> list_category =
+    //CategoryDao dao = new CategoryDao();
+    //IEnumerable<Category> a = dao.ListCategory();
+    foreach (var item in Model)
+    {
+        <tr>
+            <a href="@Url.Action("Index", "Product", new { id = item.ID })">
+                @item.Name
+            </a>
+        </tr>
+    }
+    @*foreach( var item in a )
+        {
+            <tr>
+                @item.Name
+            </tr>
+        }*@
+}

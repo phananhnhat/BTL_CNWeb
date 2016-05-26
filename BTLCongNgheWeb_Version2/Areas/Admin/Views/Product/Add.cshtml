@@ -1,0 +1,267 @@
+﻿@model BTLCongNgheWeb_Version2.Entity.Product
+@using BTLCongNgheWeb_Version2.Dao
+@using BTLCongNgheWeb_Version2.Entity
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+@section jsfooter
+{
+    <script>
+        var strForm = "";
+        var idImage = 1000;
+        //var idBtnDelete = 1000000;
+        var j = 0;
+        var mang = [""];
+        var mangSkin = [""];
+        var mangStyleBtnDelete = [""];
+
+        var objImage = [{
+            idBtnDeleteaaa: "",
+            srcaaa: ""
+        }];
+        var strmmm = "";
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+
+            finder.selectActionFunction = function (url) {
+                mang.push(url);
+                mangSkin.push("margin-top: 15px;width: 200px;");
+                mangStyleBtnDelete.push("display : normal;");
+
+
+
+                strForm = strForm + "<div class='col-xs-4 col-sm-4'><img id='" + idImage + "' src='" + mang[j + 1] + "' style='" + mangSkin[j + 1] + "'></div>";
+                document.getElementById("formImage").innerHTML = strForm;
+                document.getElementById(idImage).src = mang[j + 1];
+                document.getElementById(idImage).style = mangSkin[j + 1];
+                //document.getElementById(idBtnDelete).style = mangStyleBtnDelete[j + 1];
+                //window.onload = function () {
+
+                //    document.getElementById(idBtnDelete).onclick = readPage;
+                //}
+
+                strmmm = strmmm + url + ",";
+                var inChuoi = strmmm.substring(0, strmmm.length - 1);
+                idImage++;
+                //idBtnDelete++;
+                j++;
+                $('#URL').val(inChuoi);
+            }
+
+            finder.popup();
+
+            //$('#1000002').on('click', function () {
+            //    var timKiem = strForm.indexOf(idBtnDelete);
+            //    //var timSrc;
+            //    //for (var i = 0; i < objImage.length; i++){
+            //    //    if( objImage[i].idBtnDelete == idBtnDelete)
+            //    //    {
+            //    //        timSrc = i;
+            //    //    }
+            //    //}
+            //    //var srcLength = objImage[timSrc].src.length;
+            //    var catDuoi = 20 + 115 + timKiem;
+            //    var cuoi = strForm.length;
+            //    var strForm1 = strForm.substring(0, timKiem - 40);
+            //    var strForm2 = strForm.substring(catDuoi, cuoi);
+            //    strForm = "";
+            //    strForm = strForm1 + strForm1;
+            //    document.getElementById("formImage").innerHTML = strForm;
+            //});
+        });
+
+        function readPage() {
+            alert("Hello");
+            //var timKiem = strForm.indexOf(idBtnDelete);
+            ////var timSrc;
+            ////for (var i = 0; i < objImage.length; i++){
+            ////    if( objImage[i].idBtnDelete == idBtnDelete)
+            ////    {
+            ////        timSrc = i;
+            ////    }
+            ////}
+            ////var srcLength = objImage[timSrc].src.length;
+            //var catDuoi = 20 + 115 + timKiem;
+            //var cuoi = strForm.length;
+            //var strForm1 = strForm.substring(0, timKiem - 40);
+            //var strForm2 = strForm.substring(catDuoi, cuoi);
+            //strForm = "";
+            //strForm = strForm1 + strForm1;
+            //document.getElementById("formImage").innerHTML = strForm;
+        }
+
+
+    </script>
+}
+@using (Html.BeginForm("AddAction", "Product"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">ADD PRODUCT</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NameProduct, "TÊN SẢN PHẨM", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-8" data-val="true" data-val-length="The field NameProduct must be a string with a maximum length of 100." data-val-length-max="100" id="NameProduct" name="NameProduct" type="text" value="">
+                @Html.ValidationMessageFor(model => model.NameProduct)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FullNameProduct, "TÊN SẢN PHẨM ĐẦY ĐỦ", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-8" data-val="true" data-val-length="The field FullNameProduct must be a string with a maximum length of 500." data-val-length-max="500" id="FullNameProduct" name="FullNameProduct" type="text" value="">
+                @Html.ValidationMessageFor(model => model.FullNameProduct)
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Qty, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-9">
+                    @Html.EditorFor(model => model.Qty)
+                    @Html.ValidationMessageFor(model => model.Qty)
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, "GIÁ", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-8" data-val="true" data-val-number="The field Price must be a number." id="Price" name="Price" type="number" value="">
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.News, "MỚI", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.News)
+                @Html.ValidationMessageFor(model => model.News)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sale, "KHUYẾN MÃI ?", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Sale)
+                @Html.ValidationMessageFor(model => model.Sale)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PriceSale, "GIÁ KHUYẾN MÃI", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-8" data-val="true" data-val-number="The field PriceSale must be a number." id="PriceSale" name="PriceSale" type="number" value="">
+                @Html.ValidationMessageFor(model => model.PriceSale)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Color, "MÁU SẮC", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-8" data-val="true" data-val-length="The field Color must be a string with a maximum length of 60." data-val-length-max="60" id="Color" name="Color" type="text" value="">
+                @Html.ValidationMessageFor(model => model.Color)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Size, "KÍCH CỠ", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-8" data-val="true" data-val-length="The field Size must be a string with a maximum length of 50." data-val-length-max="50" id="Size" name="Size" type="text" value="">
+                @Html.ValidationMessageFor(model => model.Size)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Maker, "NHÀ SẢN XUẤT", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-8" data-val="true" data-val-length="The field Maker must be a string with a maximum length of 50." data-val-length-max="50" id="Maker" name="Maker" type="text" value="">
+                @Html.ValidationMessageFor(model => model.Maker)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, "MIÊU TẢ", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-8" data-val="true" data-val-length="The field Description must be a string with a maximum length of 500." data-val-length-max="500" id="Description" name="Description" type="text" value="">
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Note, "GHI CHÚ", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-8" data-val="true" data-val-length="The field Note must be a string with a maximum length of 500." data-val-length-max="500" id="Note" name="Note" type="text" value="">
+                @Html.ValidationMessageFor(model => model.Note)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Actives, "KÍCH HOẠT", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Actives)
+                @Html.ValidationMessageFor(model => model.Actives)
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CreateByUserID, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-9">
+                    @Html.EditorFor(model => model.CreateByUserID)
+                    @Html.ValidationMessageFor(model => model.CreateByUserID)
+                </div>
+            </div>*@
+        <div class="form-group">
+            @Html.Label("Category", "DANH MỤC SẢN PHẨM", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @{
+        CategoryDao cate = new CategoryDao();
+        IEnumerable<Category> list = cate.ListCategory();
+        SelectList select = new SelectList(list, "ID", "Name");
+                }
+                @Html.ListBox("Category", select)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("URL", "CHỌN ẢNH", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-8" id="URL" name="URL" type="text" value="" readonly="readonly" multiple="true">
+                <div class="col-md-12 col-sm-8">
+                    <div id="formImage">
+                        @*<div class="col-xs-4 col-sm-4">
+                                <img id="1002" src="/Data/images/Nike/grid13.jpg" style="margin-top: 15px;width: 200px;">
+                                <a id="1000002" href="#">Hủy</a>
+                            </div>*@
+                        @*<div class="col-xs-4 col-sm-4">
+                                <img id="imageURL" src="">
+                                <a id="btnDeleteImage" href="#" style="display: none;">Xoá ảnh</a>
+                            </div>*@
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <a id="btnSelectImage" href="#">Thêm ảnh</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-sm-9">
+                <button type="submit" class="btn btn-primary">CREATE</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>
+
+

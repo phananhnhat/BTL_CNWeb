@@ -1,0 +1,211 @@
+﻿@model BTLCongNgheWeb_Version2.Entity.GroupEmployee
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+@section Link {
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">Admin</a>
+        </li>
+
+        <li>
+            <a href="#">Nhóm nhân viên</a>
+        </li>
+
+        <li class="active">Thêm mới</li>
+    </ul><!-- /.breadcrumb -->
+}
+
+@using (Html.BeginForm("AddAction", "GroupEmployee"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>GroupEmployee</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.Label("NameGroupEmployee", "Tên nhóm nhân viên", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("NameGroupEmployee", null, new { @class = "col-xs-10 col-sm-4" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Note", "Ghi chú", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Note", null, new { @class = "col-xs-10 col-sm-6" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Quản lý quyền truy cập", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <table class="table">
+                    <tr>
+                        <td>
+                            Sản phẩm
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc1") Xem danh sách
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc2") Thêm sản phẩm
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc3") Sửa thông tin
+                            </label>
+
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc4") Xóa sản phẩm
+                            </label>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Danh mục sản phẩm
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc5") Xem danh mục
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc6") Thêm danh mục
+                            </label>
+
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc7") Sửa thông tin
+                            </label>
+
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc8") Xóa danh mục
+                            </label>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Hóa đơn
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc9")  Xem danh sách
+                            </label>
+
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc10") Xem chi tiết
+                            </label>
+
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc11") Xác nhận
+                            </label>
+
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc12") Hủy bỏ 
+                            </label>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Tài khoản nhân viên
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc13") Xem danh sách
+                            </label>
+
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc14") Tạo tài khoản
+                            </label>
+
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc15") Xem chi tiết
+                            </label>
+
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc16") Xóa tài khoản
+                            </label> 
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Nhóm nhân viên
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc17") Xem danh sách
+                            </label>
+
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc18") Thêm nhóm mới
+                            </label>
+
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc19") Sửa nhóm
+                            </label>
+
+                        </td>
+                        <td>
+                            <label>
+                                @Html.CheckBox("acc20") Xóa nhóm
+                            </label>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <label class="pos-rel">
+            <input type="checkbox" class="ace">
+            <span class="lbl"></span>
+        </label>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Thêm" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>
+

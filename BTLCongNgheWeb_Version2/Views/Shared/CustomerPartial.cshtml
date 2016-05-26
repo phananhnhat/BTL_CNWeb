@@ -1,0 +1,18 @@
+﻿@using BTLCongNgheWeb_Version2.Models;
+<div class="logo">
+    <a href="@Url.Action("HomePage" , "HomePage")"><img src="/Content/images/logo.png" alt="" /></a>
+</div>
+<div class="cssmenu">
+    <ul>
+        @{
+            UserLogin use = new UserLogin();
+            use = (UserLogin)Session["UserLogin"];
+            if (use != null)
+            {
+                <li>Xin chào , @use.Name </li>
+            }
+        }
+   
+        <li class="active">@Html.ActionLink("Đăng xuất", "LogOut", "Login")</li>
+    </ul>
+</div>

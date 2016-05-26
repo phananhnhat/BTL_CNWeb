@@ -1,0 +1,127 @@
+﻿@model BTLCongNgheWeb_Version2.Entity.Employee
+@using BTLCongNgheWeb_Version2.Dao
+@using BTLCongNgheWeb_Version2.Entity
+@{
+    ViewBag.Title = "Add1";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+@section Link {
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">Admin</a>
+        </li>
+
+        <li>
+            <a href="#">Nhân viên</a>
+        </li>
+        <li>
+            <a href="#">Danh sách nhân viên</a>
+        </li>
+        <li class="active">Thêm mới</li>
+    </ul><!-- /.breadcrumb -->
+}
+
+@using (Html.BeginForm("AddAction", "Employee"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Type)
+                    @Html.ValidationMessageFor(model => model.Type)
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, "Tên nhân viên", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Name, new { @class = "col-xs-10 col-sm-3" })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, "Địa chỉ", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Address, new { @class = "col-xs-10 col-sm-6" })
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumberPhone, "Số điện thoại", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.NumberPhone, new { @class = "col-xs-10 col-sm-3" })
+                @Html.ValidationMessageFor(model => model.NumberPhone)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, "Email", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Email, new { @class = "col-xs-10 col-sm-4" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.GroupEmployee, new { @class = "control-label col-md-2" })*@
+            @Html.LabelFor(model => model.GroupEmployee, "Nhóm nhân viên", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @{
+    GroupEmployeeDao groupdao = new GroupEmployeeDao();
+    IEnumerable<GroupEmployee> list = groupdao.List();
+    SelectList select = new SelectList(list, "ID", "GroupName");
+                }
+                @Html.DropDownListFor(model => model.GroupEmployee, select)
+                @Html.ValidationMessageFor(model => model.GroupEmployee)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Login, "Tài khoản", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Login, new { @class = "col-xs-10 col-sm-4" })
+                @Html.ValidationMessageFor(model => model.Login)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, "Mật khẩu", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.PasswordFor(model => model.Password, new { @class = "col-xs-10 col-sm-4" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Xacnhan", "Xác nhận mật khẩu", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.Password("Xacnhan", null, new { @class = "col-xs-10 col-sm-4" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PasswordLevel2, "Mật khẩu cấp 2", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.PasswordFor(model => model.PasswordLevel2, new { @class = "col-xs-10 col-sm-4" })
+                @Html.ValidationMessageFor(model => model.PasswordLevel2)
+            </div>
+        </div>
+        @Html.ValidationMessage("loimatkhauxacnhan")
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-10">
+                <input type="submit" value="Thêm" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại danh sách", "List")
+</div>

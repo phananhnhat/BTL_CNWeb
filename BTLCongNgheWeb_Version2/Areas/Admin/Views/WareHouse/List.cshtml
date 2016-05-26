@@ -1,0 +1,69 @@
+﻿@model IEnumerable<BTLCongNgheWeb_Version2.Entity.Product>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+@section Link {
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">Admin</a>
+        </li>
+
+        <li class="active">Kho hàng</li>
+    </ul><!-- /.breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-10">
+
+        <div class="clearfix">
+            <div class="pull-right tableTools-container"></div>
+        </div>
+        <div class="table-header">
+            Kho hàng
+        </div>
+
+        <!-- div.table-responsive -->
+        <!-- div.dataTables_borderWrap -->
+        <div>
+            <div id="dynamic-table_wrapper" class="dataTables_wrapper form-inline no-footer">
+                <div class="row">
+                    <div class="col-xs-6"><div class="dataTables_length" id="dynamic-table_length"><label>Display <select name="dynamic-table_length" aria-controls="dynamic-table" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label></div></div><div class="col-xs-6"><div id="dynamic-table_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="dynamic-table"></label></div></div>
+                </div>
+                <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayName("Mã sản phẩm")</th>
+                            <th>@Html.DisplayName("Tên sản phẩm")</th>
+                            <th>@Html.DisplayName("Hãng sản xuất")</th>
+                            <th class="hidden-480">@Html.DisplayName("Số lượng")</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NameProduct)
+                                </td>
+                                <td class="hidden-480">
+                                    @Html.DisplayFor(modelItem => item.Maker)
+                                </td>
+                                <td>
+                                   @Html.DisplayFor(modelItem => item.Qty)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<p>@ViewBag.ida</p>
