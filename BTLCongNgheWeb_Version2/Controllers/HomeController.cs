@@ -23,7 +23,7 @@ namespace BTLCongNgheWeb_Version2.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-            // Dkm bon m , rat la xam l nhé
+            // Dkm bon m , rat la xam l nhé , test thu thôi
             return View();
         }
     }
