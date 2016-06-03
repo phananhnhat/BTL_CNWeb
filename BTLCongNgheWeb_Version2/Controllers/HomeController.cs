@@ -24,6 +24,7 @@ namespace BTLCongNgheWeb_Version2.Controllers
         {
             ViewBag.Message = "Your contact page.";
             // Dkm bon m , rat la xam l nhé , test thu thôi
+            // Lần commit lên trên git
             return View();
         }
     }
