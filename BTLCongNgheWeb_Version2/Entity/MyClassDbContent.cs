@@ -1,4 +1,4 @@
-namespace BTLCongNgheWeb_Version2.Entity
+﻿namespace BTLCongNgheWeb_Version2.Entity
 {
     using System;
     using System.Data.Entity;
@@ -11,7 +11,7 @@ namespace BTLCongNgheWeb_Version2.Entity
             : base("name=MyClassDbContent")
         {
         }
-
+        // Như cái ấy nhi
         public virtual DbSet<Access> Accesses { get; set; }
         public virtual DbSet<Authorization> Authorizations { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
