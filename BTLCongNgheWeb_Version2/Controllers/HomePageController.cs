@@ -53,5 +53,9 @@ namespace BTLCongNgheWeb_Version2.Controllers
             List<ViewProduct> vp = pDao2.ListProductByCategory(id);
             return View(vp);
         }
+        public ActionResult HomePage()
+        {
+            return View();
+        }
 	}
 }
