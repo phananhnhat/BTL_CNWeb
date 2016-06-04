@@ -11,7 +11,7 @@
             : base("name=MyClassDbContent")
         {
         }
-        // Như cái ấy nhi
+        // haizzz
         public virtual DbSet<Access> Accesses { get; set; }
         public virtual DbSet<Authorization> Authorizations { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
