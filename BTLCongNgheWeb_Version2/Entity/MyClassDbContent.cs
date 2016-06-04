@@ -12,6 +12,8 @@ namespace BTLCongNgheWeb_Version2.Entity
         {
         }
 
+
+// Fuck tahat
         public virtual DbSet<Access> Accesses { get; set; }
         public virtual DbSet<Authorization> Authorizations { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
