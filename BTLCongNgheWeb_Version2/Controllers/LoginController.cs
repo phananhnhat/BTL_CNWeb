@@ -69,6 +69,7 @@ namespace BTLCongNgheWeb_Version2.Controllers
         {
             //CustomerD employee_dao = new EmployeeDao();
             // Viết code thêm tài khoản cho khách hàng vào đây
+            // Test 
             return RedirectToAction("HomePage", "HomePage", new { Area = "" });
         }
         public ActionResult Success()
@@ -76,4 +77,5 @@ namespace BTLCongNgheWeb_Version2.Controllers
             return View();
         }
     }
+ 
 }
