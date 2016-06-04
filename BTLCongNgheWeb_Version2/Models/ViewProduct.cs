@@ -42,5 +42,6 @@ namespace BTLCongNgheWeb_Version2.Models
         public string UrlImage { get; set; }
 
         public string NameCate { get; set; }
+        // Thử test thay đổi
     }
 }
