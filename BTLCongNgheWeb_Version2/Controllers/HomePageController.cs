@@ -57,5 +57,19 @@ namespace BTLCongNgheWeb_Version2.Controllers
         {
             return View();
         }
+        public ActionResult Order()
+        {
+             
+            //ShopingCart donhang = (ShopingCart)Session["Order"];
+            ShopingCart donhang = new ShopingCart();
+            donhang.AddCard(new CardItem(1, "aaaaaa", 3, 32323));
+            donhang.AddCard(new CardItem(2, "vvvvvvv", 3, 32323));
+            donhang.AddCard(new CardItem(3, "bbbbb", 3, 32323));
+            donhang.AddCard(new CardItem(4, "eeeee", 3, 32323));
+            donhang.AddCard(new CardItem(5, "dddd", 3, 32323));
+            donhang.AddCard(new CardItem(6, "gggggg", 3, 32323));
+            donhang.AddCard(new CardItem(7, "fffff", 3, 32323));
+            return View("Order",donhang);
+        }
 	}
 }

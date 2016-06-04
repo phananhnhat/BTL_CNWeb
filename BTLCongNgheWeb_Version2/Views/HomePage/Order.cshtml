@@ -1,0 +1,25 @@
+﻿@model BTLCongNgheWeb_Version2.Models.ShopingCart
+@using BTLCongNgheWeb_Version2.Models
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+<table>
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CardItem i in Model.listItem)
+        {
+            <tr>
+                <td>@i.name</td>
+                <td>@i.so_luong</td>
+                <td>@i.gia</td>
+            </tr>
+        }
+</table>
+
