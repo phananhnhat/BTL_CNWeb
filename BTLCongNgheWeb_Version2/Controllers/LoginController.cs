@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BTLCongNgheWeb_Version2.Dao;
 using BTLCongNgheWeb_Version2.Models;
+using BTLCongNgheWeb_Version2.Entity;
 namespace BTLCongNgheWeb_Version2.Controllers
 {
     public class LoginController : Controller
@@ -63,6 +64,12 @@ namespace BTLCongNgheWeb_Version2.Controllers
         public ActionResult SignUp()
         {
             return View();
+        }
+        public ActionResult AddCustomer(Customer customer_new)
+        {
+            //CustomerD employee_dao = new EmployeeDao();
+            // Viết code thêm tài khoản cho khách hàng vào đây
+            return RedirectToAction("HomePage", "HomePage", new { Area = "" });
         }
         public ActionResult Success()
         {

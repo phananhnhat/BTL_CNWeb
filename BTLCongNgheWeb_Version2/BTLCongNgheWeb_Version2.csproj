@@ -182,6 +182,7 @@
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Dao\AuthorizationDao.cs" />
     <Compile Include="Dao\CategoryDao.cs" />
+    <Compile Include="Dao\CustomerDao.cs" />
     <Compile Include="Dao\EmployeeDao.cs" />
     <Compile Include="Dao\GroupEmployeeDao.cs" />
     <Compile Include="Dao\LoginDao.cs" />
@@ -1649,6 +1650,7 @@
     <Content Include="Views\Register\View1.cshtml" />
     <Content Include="Views\HomePage\Detail.cshtml" />
     <Content Include="Views\HomePage\ListProductByCategory.cshtml" />
+    <Content Include="Views\Login\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

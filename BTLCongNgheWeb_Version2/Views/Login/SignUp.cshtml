@@ -1,0 +1,59 @@
+﻿@model BTLCongNgheWeb_Version2.Entity.Customer
+@{
+    ViewBag.Title = "View1";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+<div class="register_account">
+    <div class="wrap">
+        <h3 class="title">Quý khách vui lòng đăng ký tài khoản mua hàng để quản lý đơn hàng và đặt mua một cách dễ dàng, chuyên nghiệp nhất.</h3>
+        <hr />
+        @using (Html.BeginForm("AddCustomer", "Login"))
+        {
+            <div class="col_1_of_2 span_1_of_2">
+                Thông tin đăng nhập
+                @Html.AntiForgeryToken()
+                <div>
+                    @Html.TextBoxFor(model => model.Name, new { @placeholder = "Tài khoản" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                <div>
+                    @Html.TextBoxFor(model => model.Name, new { @placeholder = "Mật khẩu" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                <div style="height: 80px;overflow: auto;padding: 5px;width: 96%;margin: 6px 0;border: 1px solid #ddd;">
+                    Khi bạn truy cập vào trang web của chúng tôi có nghĩa là bạn đồng ý với các điều khoản này. Trang web có quyền thay đổi, chỉnh sửa, thêm hoặc lược bỏ bất kỳ phần nào trong Quy định và Điều kiện sử dụng, vào bất cứ lúc nào. Các thay đổi có hiệu lực ngay khi được đăng trên trang web mà không cần thông báo trước. Và khi bạn tiếp tục sử dụng trang web, sau khi các thay đổi về Quy định và Điều kiện được đăng tải, có nghĩa là bạn chấp nhận với những thay đổi đó.<br>
+                    Quý khách vui lòng kiểm tra thường xuyên để cập nhật những thay đổi của chúng tôi.
+
+                </div>
+                <div>
+                    <input type="checkbox"> Đồng ý với điều khoản sử dụng
+                </div>
+            </div>
+            <div class="col_1_of_2 span_1_of_2">
+                Thông tin cá nhân
+                <div>
+                    @Html.TextBoxFor(model => model.Name, new { @placeholder = "Họ và tên" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div><div>
+                    @Html.TextBoxFor(model => model.Name, new { @placeholder = "Số điện thoại" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div><div>
+                    @Html.TextBoxFor(model => model.Name, new { @placeholder = "Địa chỉ liên hệ" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div><div>
+                    @Html.TextBoxFor(model => model.Name, new { @placeholder = "Email" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div><div>
+                    @Html.TextBoxFor(model => model.Name, new { @placeholder = "Ngày sinh" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                    thuvsvsvsv
+                </div>
+            </div>
+            <input type="submit" class="grey" value="Submit" />
+            <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
+            <div class="clear"></div>
+        }
+    </div>
+</div>
+
+
