@@ -1647,7 +1647,8 @@
     <Content Include="Views\Login\Test.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Register\View1.cshtml" />
-    <Content Include="Views\Shared\_HomePage1.cshtml" />
+    <Content Include="Views\HomePage\Detail.cshtml" />
+    <Content Include="Views\HomePage\ListProductByCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
