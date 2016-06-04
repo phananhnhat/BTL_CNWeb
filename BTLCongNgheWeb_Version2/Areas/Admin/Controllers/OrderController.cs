@@ -60,7 +60,7 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
                     ViewBag.OrderItem = order_dao.ListOrderItem(id);
                     return View("Details", order);
                 }
-                else return RedirectToAction("Error", "Error");   
+                else return RedirectToAction("Error", "Error");
             }
             else
             {
@@ -77,7 +77,7 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
                 {
                     OrderDao order_dao = new OrderDao();
                     order_dao.DeleteOrder(id);
-                    return RedirectToAction("List");
+                    return RedirectToAction("List", new { RequiredPage = 1 });
                 }
                 else return RedirectToAction("Error", "Error");
             }
@@ -110,6 +110,18 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
             OrderDao order_dao = new OrderDao();
             ViewBag.OrderItem = order_dao.ListOrderItem(id);
             return View();
+        }
+        public ActionResult DeliveryConfirmation(int id)
+        {
+            OrderDao order_dao =new OrderDao();
+            order_dao.DeliveryConfirmation(id);
+            return RedirectToAction("Details", "Order", new { id = id });
+        }
+        public ActionResult PaymentConfirmation(int id)
+        {
+            OrderDao order_dao =new OrderDao();
+            order_dao.PaymentConfirmation(id);
+            return RedirectToAction("Details", "Order", new { id = id });
         }
 	}
 }

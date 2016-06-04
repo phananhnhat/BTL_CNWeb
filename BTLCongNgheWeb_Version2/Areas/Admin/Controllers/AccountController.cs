@@ -19,5 +19,9 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
             Session["UserLogin"] = null;
             return RedirectToAction("Index", "Login", new { Area = "" });
         }
+        public ActionResult ChangePassWord()
+        {
+            return View();
+        }
 	}
 }

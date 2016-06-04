@@ -69,5 +69,17 @@ namespace BTLCongNgheWeb_Version2.Dao
             }
             db.SaveChanges();
         }
+        public void DeliveryConfirmation(int ID)
+        {
+            Order p = db.Orders.Find(ID);
+            p.GiaoHang = true;
+            db.SaveChanges();
+        }
+        public void PaymentConfirmation(int ID)
+        {
+            Order p = db.Orders.Find(ID);
+            p.ThanhToan = true;
+            db.SaveChanges();
+        }
     }
 }

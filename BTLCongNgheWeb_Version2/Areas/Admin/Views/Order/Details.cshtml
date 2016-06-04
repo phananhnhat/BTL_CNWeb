@@ -76,12 +76,12 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.GiaoHang, "Giao hàng", new { @class = "control-label col-md-2" })
                 <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.GiaoHang, new { @class = "col-xs-10 col-sm-5", @readonly = "readonly" })
+                    @Html.TextBoxFor(model => model.GiaoHang, new { @class = "col-xs-10 col-sm-10", @readonly = "readonly" })
                     @Html.ValidationMessageFor(model => model.GiaoHang)
                 </div>
                 @Html.LabelFor(model => model.ThanhToan, "Thanh toán", new { @class = "control-label col-md-2" })
                 <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.ThanhToan, new { @class = "col-xs-10 col-sm-5", @readonly = "readonly" })
+                    @Html.TextBoxFor(model => model.ThanhToan, new { @class = "col-xs-10 col-sm-10", @readonly = "readonly" })
                     @Html.ValidationMessageFor(model => model.ThanhToan)
                 </div>
             </div>
@@ -102,9 +102,6 @@
             <!-- div.dataTables_borderWrap -->
             <div>
                 <div id="dynamic-table_wrapper" class="dataTables_wrapper form-inline no-footer">
-                    <div class="row">
-                        <div class="col-xs-6"><div class="dataTables_length" id="dynamic-table_length"><label>Display <select name="dynamic-table_length" aria-controls="dynamic-table" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label></div></div><div class="col-xs-6"><div id="dynamic-table_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="dynamic-table"></label></div></div>
-                    </div>
                     <table id="dynamic-table" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
@@ -170,18 +167,34 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-4 col-md-9">
-            @Html.ActionLink("Sửa thông tin", "Edit", new { id = Model.ID }, new { @class = "btn btn-info" })
+    <div class="row">
+        <div class="col-md-3 col-md-offset-3">
+            @if (Model.GiaoHang == true)
+            {
+                <a class="btn">Xác nhận giao hàng</a>
+            }
+            else
+            {
+                @Html.ActionLink("Xác nhận giao hàng", "DeliveryConfirmation", new { id = Model.ID }, new { @class = "btn btn-info" })
+            }
+        </div>
+        <div class="col-md-3">
+            @if (Model.ThanhToan == true)
+            {
+                <a class="btn">Xác nhận thanh toán</a>
+            }
+            else
+            {
+                @Html.ActionLink("Xác nhận thanh toán", "PaymentConfirmation", new { id = Model.ID }, new { @class = "btn btn-info" })
+            }
         </div>
     </div>
-
-
 </div>
 <div class="form-group">
+
     <div class="col-md-9">
         <p>
-            @Html.ActionLink("Quay lại danh sách", "List", new { id = Model.ID })
+            @Html.ActionLink("Quay lại danh sách", "List", new { RequiredPage = 1 })
         </p>
     </div>
     <div class="control-label col-md-3">
