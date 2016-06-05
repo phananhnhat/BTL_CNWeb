@@ -70,6 +70,8 @@ namespace BTLCongNgheWeb_Version2.Controllers
             //CustomerD employee_dao = new EmployeeDao();
             // Viết code thêm tài khoản cho khách hàng vào đây
             // Test 
+            CustomerDao cus_dao = new CustomerDao();
+            int result = cus_dao.InsertCustomer(customer_new); // vẫn chưa biết xử lý
             return RedirectToAction("HomePage", "HomePage", new { Area = "" });
         }
         public ActionResult Success()

@@ -10,10 +10,24 @@ namespace BTLCongNgheWeb_Version2.Dao
 {
     public class CustomerDao
     {
-         MyClassDbContent db;
-         public CustomerDao()
+        MyClassDbContent db;
+        public CustomerDao()
         {
             db = new MyClassDbContent();
         }
+        public int InsertCustomer(Customer customer)
+         {
+             object[] SqlParams = 
+            {
+                new SqlParameter("@Name",customer.Name),
+                new SqlParameter("@NumberPhone",customer.NumberPhone),
+                new SqlParameter("@Address",customer.Address),
+                new SqlParameter("@Email",customer.Email),
+                new SqlParameter("@Login",customer.Login),
+                new SqlParameter("@Password",customer.Password)
+            };
+             int result = db.Database.SqlQuery<int>("Customer_Add", SqlParams).SingleOrDefault();
+             return result;
+         }
     }
 }
