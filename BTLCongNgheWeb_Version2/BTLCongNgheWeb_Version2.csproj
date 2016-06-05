@@ -1537,7 +1537,6 @@
     <Content Include="Areas\Admin\Views\GroupEmployee\List.cshtml" />
     <Content Include="Areas\Admin\Views\Order\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Order\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Order\List.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\InfoPartial.cshtml" />
     <Content Include="Areas\Admin\Views\WareHouse\List.cshtml" />
     <Content Include="Content\images\arrows.psd" />
@@ -1566,6 +1565,7 @@
     <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Product\List.cshtml" />
     <Content Include="Areas\Admin\Views\Account\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

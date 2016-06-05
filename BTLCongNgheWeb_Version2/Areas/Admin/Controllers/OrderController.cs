@@ -16,7 +16,7 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult List(int RequiredPage)
+        public ActionResult List(int page)
         {
             if (Session["UserLogin"] != null)
             {
@@ -28,9 +28,9 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
                     //IEnumerable<Order> list = order_dao.ListOrder();
                     //return View("List", list);
                     OrderDao order_dao = new OrderDao();
-                    IEnumerable<Order> list = order_dao.ListOrder_Paging(RequiredPage, 7);
+                    IEnumerable<Order> list = order_dao.ListOrder_Paging(page, 10);
                     ViewBag.Count = order_dao.CountOrder();
-                    ViewBag.RequiredPage = RequiredPage;
+                    ViewBag.RequiredPage = page;
                     return View("List", list);
                 }
                 else return RedirectToAction("Error", "Error");   
@@ -95,10 +95,11 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
                 if (au.CheckAccess(em.GroupEmployeeID, 10) == true)
                 {
                     OrderDao order_dao = new OrderDao();
+                    Order order = order_dao.FindOrderByID(id); // Cái này gửi sang cũng chẳng để làm gì , phương án cũ , ko dùng
                     ViewBag.OrderItem = order_dao.ListOrderItem(id);
-                    return View();
+                    return View("Details", order);
                 }
-                else return RedirectToAction("Error", "Error"); 
+                else return RedirectToAction("Error", "Error");
             }
             else
             {
@@ -125,3 +126,38 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
         }
 	}
 }
+
+
+
+
+   //@{
+   //                                 int sotrang = ViewBag.Count / 10 + 1;
+   //                                 int index = ViewBag.RequiredPage;
+   //                                 if (index == 1)
+   //                                 {
+   //                                     <li class="paginate_button previous disabled" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous"><a href="#">Trang trước</a></li>
+   //                                 }
+   //                                 else
+   //                                 {
+   //                                     <li class="paginate_button previous" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous"><a href="@Url.Action("List", "Order", new { RequiredPage = index - 1 })">Trang trước</a></li>
+   //                                 }
+   //                                 for (int i = 1; i <= sotrang; i++)
+   //                                 {
+   //                                     if (i == index)
+   //                                     {
+   //                                         <li class="paginate_button active" aria-controls="dynamic-table" tabindex="0"><a href="#">@i</a></li>
+   //                                     }
+   //                                     else
+   //                                     {
+   //                                         <li class="paginate_button " aria-controls="dynamic-table" tabindex="0"><a href="@Url.Action("List", "Order", new { RequiredPage = i })">@i</a></li>
+   //                                     }
+   //                                 }
+   //                                 if (index == sotrang)
+   //                                 {
+   //                                     <li class="paginate_button next disabled" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_next"><a href="#">Trang sau</a></li>
+   //                                 }
+   //                                 else
+   //                                 {
+   //                                     <li class="paginate_button next" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_next"><a href="@Url.Action("List", "Order", new { RequiredPage = index + 1 })">Trang sau</a></li>
+   //                                 }
+   //                             }

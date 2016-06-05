@@ -13,8 +13,6 @@
         <li class="active">Đơn hàng</li>
     </ul><!-- /.breadcrumb -->
 }
-
-
 <div class="row">
     <div class="col-xs-10">
 
@@ -29,9 +27,6 @@
         <!-- div.dataTables_borderWrap -->
         <div>
             <div id="dynamic-table_wrapper" class="dataTables_wrapper form-inline no-footer">
-                <div class="row">
-                    <div class="col-xs-6"><div class="dataTables_length" id="dynamic-table_length"><label>Display <select name="dynamic-table_length" aria-controls="dynamic-table" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label></div></div><div class="col-xs-6"><div id="dynamic-table_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="dynamic-table"></label></div></div>
-                </div>
                 <table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable no-footer">
                     <thead>
                         <tr>
@@ -115,46 +110,67 @@
 
                     </tbody>
                 </table>
-                <div class="row">
-                    <div class="col-xs-6">
-                        @*<div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">Hiển 1 to 10 of 23 entries</div>*@
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
-                            <ul class="pagination">
-                                @{
-                                    int sotrang = ViewBag.Count / 10 + 1;
-                                    int index = ViewBag.RequiredPage;
-                                    if(index == 1)
-                                    {
-                                        <li class="paginate_button previous disabled" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous"><a href="#">Trang trước</a></li>
-                                    }
-                                    else
-                                    {
-                                        <li class="paginate_button previous" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous"><a href="@Url.Action("List", "Order", new { RequiredPage = index - 1 })">Trang trước</a></li>
-                                    }
-                                    for (int i = 1; i <= sotrang;i++ )
-                                    {
-                                        if(i == index)
-                                        {
-                                            <li class="paginate_button active" aria-controls="dynamic-table" tabindex="0"><a href="#">@i</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="paginate_button " aria-controls="dynamic-table" tabindex="0"><a href="@Url.Action("List", "Order", new { RequiredPage = i })">@i</a></li>
-                                        }
-                                    }
-                                    if(index == sotrang)
-                                    {
-                                        <li class="paginate_button next disabled" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_next"><a href="#">Trang sau</a></li>
-                                    }
-                                    else
-                                    {
-                                        <li class="paginate_button next" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_next"><a href="@Url.Action("List", "Order", new { RequiredPage = index + 1 })">Trang sau</a></li>
-                                    }
-                                }
-                                 
-                            </ul>
+                <div class="ui-jqgrid ui-widget ui-widget-content ui-corner-all" id="gbox_grid-table" dir="ltr" style="width: 100%;">
+                    <div class="ui-jqgrid-pager ui-state-default ui-corner-bottom" id="gbox_grid-table" dir="ltr" style="width: 100%;">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4">
+                            @{
+                                int sotrang = ViewBag.count / 10 + 1;
+                                int index = ViewBag.requiredpage;
+                            }
+                            @using (Html.BeginForm("List", "Order"))
+                            {
+                                <table class="ui-pg-table ui-common-table ui-paging-pager" style="text-align:center">
+                                    <tbody>
+                                        <tr>
+                                            @if (index == 1)
+                                            {
+                                                <td id="first_grid-pager" class="ui-pg-button ui-corner-all ui-state-disabled" title="First Page" style="cursor: default;"><span class="ui-icon ace-icon fa fa-angle-double-left bigger-140"></span></td>
+                                                <td id="prev_grid-pager" class="ui-pg-button ui-corner-all ui-state-disabled" title="Previous Page" style="cursor: default;"><span class="ui-icon ace-icon fa fa-angle-left bigger-140"></span></td> }
+                                            else
+                                            {
+                                                <td id="first_grid-pager" class="ui-pg-button ui-corner-all ui-state" title="First Page" style="cursor: default;">
+                                                    <a class="ui-icon ace-icon fa fa-angle-double-left bigger-140" href="@Url.Action("List", "Order", new { page = 1 })"></a>
+                                                </td>
+                                                <td id="prev_grid-pager" class="ui-pg-button ui-corner-all ui-state" title="Previous Page" style="cursor: default;">
+                                                    <a class="ui-icon ace-icon fa fa-angle-left bigger-140" href="@Url.Action("List", "Order", new { page = @index-1 })"></a>
+                                                </td>  }
+                                            <td class="ui-pg-button ui-state-disabled" style="cursor: default;"><span class="ui-separator"></span></td>
+                                            <td id="input_grid-pager" dir="ltr">
+                                                Trang
+                                                @*<input class="ui-pg-input ui-corner-all" type="text" size="2" maxlength="7" value="0" role="textbox">*@
+                                                @Html.TextBox("page", null, "", new { @class = "ui-pg-input ui-corner-all" })
+                                                trên <span id="sp_1_grid-pager">@sotrang</span>
+                                            </td>
+                                            <td class="ui-pg-button ui-state-disabled"><span class="ui-separator"></span></td>
+                                            @if (index == sotrang)
+                                            {
+                                                <td id="next_grid-pager" class="ui-pg-button ui-corner-all ui-state-disabled" title="Next Page" style="cursor: default;"><span class="ui-icon ace-icon fa fa-angle-right bigger-140"></span></td>
+                                                <td id="last_grid-pager" class="ui-pg-button ui-corner-all ui-state-disabled" title="Last Page" style="cursor: default;"><span class="ui-icon ace-icon fa fa-angle-double-right bigger-140"></span></td> }
+                                            else
+                                            {
+                                                <td id="next_grid-pager" class="ui-pg-button ui-corner-all ui-state-hover" title="Next Page" style="cursor: pointer;">
+                                                    <a class="ui-icon ace-icon fa fa-angle-right bigger-140" href="@Url.Action("List", "Order", new { page = @index+1 })"></a>
+                                                </td>
+                                                <td id="last_grid-pager" class="ui-pg-button ui-corner-all" title="Last Page" style="cursor: default;">
+                                                    <a class="ui-icon ace-icon fa fa-angle-double-right bigger-140" href="@Url.Action("List", "Order", new { page = @sotrang })"></a>
+                                                </td>  }
+                                           
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
+                        <div class="col-xs-4">
+                            @{
+                                int dau = (index - 1) * 10 + 1;
+                                int cuoi;
+                                if (dau + 10 <= ViewBag.count)
+                                { cuoi = dau + 9; }
+                                else
+                                { cuoi = int.Parse(ViewBag.count.ToString()); }
+                            }
+                            <div dir="ltr" style="text-align:right" class="ui-paging-info">Hiển thị @dau - @cuoi của @ViewBag.count bản ghi</div>
                         </div>
                     </div>
                 </div>
@@ -162,5 +178,3 @@
         </div>
     </div>
 </div>
-
-
