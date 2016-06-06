@@ -185,6 +185,7 @@
     <Compile Include="Dao\CustomerDao.cs" />
     <Compile Include="Dao\EmployeeDao.cs" />
     <Compile Include="Dao\GroupEmployeeDao.cs" />
+    <Compile Include="Dao\HistoryDailyDao.cs" />
     <Compile Include="Dao\LoginDao.cs" />
     <Compile Include="Dao\OrderDao.cs" />
     <Compile Include="Dao\OrderItem.cs" />
@@ -196,12 +197,12 @@
     <Compile Include="Entity\CF_Orders_Products.cs" />
     <Compile Include="Entity\CF_Products_Categories.cs" />
     <Compile Include="Entity\Comment.cs" />
-    <Compile Include="Entity\Counter.cs" />
     <Compile Include="Entity\Customer.cs" />
     <Compile Include="Entity\Employee.cs" />
     <Compile Include="Entity\Evaluate.cs" />
     <Compile Include="Entity\GroupEmployee.cs" />
     <Compile Include="Entity\History.cs" />
+    <Compile Include="Entity\HistoryDaily.cs" />
     <Compile Include="Entity\MyClassDbContent.cs" />
     <Compile Include="Entity\Order.cs" />
     <Compile Include="Entity\Product.cs" />
@@ -1653,6 +1654,7 @@
     <Content Include="Views\HomePage\ListProductByCategory.cshtml" />
     <Content Include="Views\Login\SignUp.cshtml" />
     <Content Include="Views\HomePage\Order.cshtml" />
+    <Content Include="Views\HomePage\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

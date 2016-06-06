@@ -66,12 +66,18 @@
                 else
                 {
                     <div class="logo">
-                        <a href="@Url.Action("HomePage" , "HomePage")"><img src="/Content/images/logo.png" alt="" /></a>
+                        <a href="@Url.Action("HomePage" , "HomePage")"><img src="/Content/images/logo.png" alt="" /></a>                    
                     </div>
                     <div class="cssmenu">
                         <ul>
                             <li class="active"><a href="@Url.Action("Index" , "Login")">Đăng nhập</a></li>
                             <li><a href="@Url.Action("SignUp", "Login")">Đăng ký</a></li>
+                            <li>         
+                                <div style="background-color: black; display: inline;">
+                                    <img style="" src="~/Content/images/f_icon.png" alt=""> 
+                                </div>
+                                <a style="display: inline;" href="@Url.Action("Order", "HomePage")">Giỏ hàng</a>
+                            </li>
                         </ul>
                     </div>
                 }
@@ -112,7 +118,6 @@
     </div>
     <!-- Page Content -->
     @RenderBody()
-
     <!-- End Page Content -->
     <div class="footer">
         <div class="footer-top">

@@ -74,9 +74,9 @@
             @Html.LabelFor(model => model.GroupEmployee, "Nhóm nhân viên", new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 @{
-    GroupEmployeeDao groupdao = new GroupEmployeeDao();
-    IEnumerable<GroupEmployee> list = groupdao.List();
-    SelectList select = new SelectList(list, "ID", "GroupName");
+                    GroupEmployeeDao groupdao = new GroupEmployeeDao();
+                    IEnumerable<GroupEmployee> list = groupdao.List();
+                    SelectList select = new SelectList(list, "ID", "GroupName");
                 }
                 @Html.DropDownListFor(model => model.GroupEmployee, select)
                 @Html.ValidationMessageFor(model => model.GroupEmployee)

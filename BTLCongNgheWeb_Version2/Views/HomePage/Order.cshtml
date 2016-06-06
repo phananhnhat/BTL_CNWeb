@@ -4,22 +4,107 @@
     ViewBag.Title = "Order";
     Layout = "~/Views/Shared/_HomePage.cshtml";
 }
-<table>
-    <thead>
-        <tr>
-            <th>Tên</th>
-            <th>Số lượng</th>
-            <th>Giá</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (CardItem i in Model.listItem)
-        {
+<style>
+    table {
+        font-size: 90%;
+    }
+
+    th {
+        padding: 6px;
+        border: 1px solid #ccc;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    td {
+        padding: 6px;
+        border: 1px solid #ccc;
+        text-align: left;
+        background: #FFF;
+        color: #000;
+    }
+</style>
+<div style="margin: 30px 10% 30px 10%;">
+    <table>
+        <thead>
             <tr>
-                <td>@i.name</td>
-                <td>@i.so_luong</td>
-                <td>@i.gia</td>
+                <th style="width:8%">STT</th>
+                <th style="width:40%">Tên sản phẩm</th>
+                <th style="width:17%">Số lượng</th>
+                <th style="width:15%">Giá bán</th>
+                <th style="width:15%">Thành tiên</th>
+                <th style="width:15%">Xác nhận</th>
             </tr>
-        }
-</table>
+        </thead>
+        <tbody>
+            @{
+                int stt = 0;
+                int thanhtien;
+                int tong = 0;
+            }
+            @foreach (CardItem i in Model.listItem)
+            {
+                stt++;
+                thanhtien = i.so_luong * i.gia;
+                tong += thanhtien;
+                <tr>
+                    <td>@stt</td>
+                    <td>@i.name</td>
+                    <td>@i.so_luong</td>
+                    <td>@i.gia</td>
+                    <td>@thanhtien</td>
+                    <td>Hủy</td>
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Tổng</td>
+                <td>@tong</td>
+                <td></td>
+            </tr>
+    </table>
+</div>
+<div class="wrap" style="width:50%; margin-bottom:30px">
+    @using (Html.BeginForm("OrderAdd", "HomePage"))
+    {
+        <div class="login-title">
+            Thông tin khách hàng
+            <div class="comments-area">
+                <p>
+                    @Html.LabelFor(model => model.TenKhachHang, "Tên khách hàng")
+                    <span>*</span>
+                    @Html.TextBoxFor(model => model.TenKhachHang)
+                    @Html.ValidationMessageFor(model => model.TenKhachHang)
+                </p>
+                <p>
+                    @Html.LabelFor(model => model.DiaChiGiaoHang, "Địa chỉ nhận hàng")
+                    <span>*</span>
+                    @Html.TextBoxFor(model => model.DiaChiGiaoHang)
+                    @Html.ValidationMessageFor(model => model.DiaChiGiaoHang)
+                </p>
+                <p>
+                    @Html.LabelFor(model => model.SDTLienLac, "Số điện thoại ")
+                    <span>*</span>
+                    @Html.TextBoxFor(model => model.SDTLienLac)
+                    @Html.ValidationMessageFor(model => model.SDTLienLac)
+                </p>
+                <p>
+                    @Html.LabelFor(model => model.NgayHoanThanh, "Ngày giao hàng ")
+                    <div>
+                        @*@Html.TextBoxFor(model => model.NgayHoanThanh,null, new { @type = "date" })*@
+                        @Html.TextBox("ngayhoanthanh",null, new { @type = "date" })
+                        @Html.ValidationMessageFor(model => model.NgayHoanThanh)
+                    </div>
+                </p>
+                <p>
+                    <input type="submit" value="Gửi đơn hàng" />
+                </p>
+            </div>
+
+        </div>
+    }
+    <div class="clear"></div>
+</div>
 

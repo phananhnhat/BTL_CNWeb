@@ -8,12 +8,16 @@ namespace BTLCongNgheWeb_Version2.Models
     public class ShopingCart
     {
         public List<CardItem> listItem;
-
+        public int CustomerID { get; set; }
+        public string TenKhachHang { get; set; }
+        public string SDTLienLac { get; set; }
+        public string DiaChiGiaoHang { get; set; }
+        public DateTime NgayNhanYeuCau;
+        public DateTime NgayHoanThanh;
         public ShopingCart()
         {
             listItem = new List<CardItem>();
         }
-
         public void AddCard(CardItem item)
         {
             foreach (CardItem i in listItem)
@@ -38,7 +42,6 @@ namespace BTLCongNgheWeb_Version2.Models
                 }
             }
         }
-
         public void DeleteCard(int id)
         {
             foreach (CardItem i in listItem)
@@ -50,7 +53,6 @@ namespace BTLCongNgheWeb_Version2.Models
                 }
             }
         }
-
         public double GetTotal()
         {
             double total = 0.0;

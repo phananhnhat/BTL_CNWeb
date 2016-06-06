@@ -1,4 +1,4 @@
-﻿namespace BTLCongNgheWeb_Version2.Entity
+namespace BTLCongNgheWeb_Version2.Entity
 {
     using System;
     using System.Data.Entity;
@@ -8,21 +8,21 @@
     public partial class MyClassDbContent : DbContext
     {
         public MyClassDbContent()
-            : base("name=MyClassDbContent")
+            : base("name=MyClassDbContent1")
         {
         }
-        // haizzz
+
         public virtual DbSet<Access> Accesses { get; set; }
         public virtual DbSet<Authorization> Authorizations { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CF_Orders_Products> CF_Orders_Products { get; set; }
         public virtual DbSet<CF_Products_Categories> CF_Products_Categories { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
-        public virtual DbSet<Counter> Counters { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Evaluate> Evaluates { get; set; }
         public virtual DbSet<GroupEmployee> GroupEmployees { get; set; }
+        public virtual DbSet<HistoryDaily> HistoryDailies { get; set; }
         public virtual DbSet<History> Historys { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }

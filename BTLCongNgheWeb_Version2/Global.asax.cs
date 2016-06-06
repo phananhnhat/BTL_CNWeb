@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BTLCongNgheWeb_Version2.Dao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,8 @@ namespace BTLCongNgheWeb_Version2
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            HistoryDailyDao his_dao = new HistoryDailyDao();
+            his_dao.Update();
         }
     }
 }

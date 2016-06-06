@@ -16,7 +16,7 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
         //{
         //    return View("List");
         //}
-        public ActionResult List()
+        public ActionResult List(int page)
         {
             if (Session["UserLogin"] != null)
             {
@@ -24,8 +24,10 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
                 AuthorizationDao au = new AuthorizationDao();
                 if (au.CheckAccess(em.GroupEmployeeID, 13) == true)
                 {
-                    EmployeeDao my = new EmployeeDao();
-                    IQueryable<Employee> list = my.ListEmployee();
+                    EmployeeDao employee_dao = new EmployeeDao();
+                    IEnumerable<Employee> list = employee_dao.ListEmployee_GetPage(page, 10);
+                    ViewBag.Count = employee_dao.CountEmployee();
+                    ViewBag.RequiredPage = page;
                     return View("List", list);
                 }
                 else return RedirectToAction("Error", "Error");

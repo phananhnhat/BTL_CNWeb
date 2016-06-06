@@ -511,7 +511,7 @@
 
                     <ul class="submenu">
                         <li class="">
-                            <a href="@Url.Action("List" , "Employee")">
+                            <a href="@Url.Action("List", "Employee", new { page = 1})">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 Danh sách nhân viên
                             </a>
@@ -519,7 +519,7 @@
                         </li>
 
                         <li class="">
-                            <a href="@Url.Action("List" , "GroupEmployee")">
+                            <a href="@Url.Action("List" , "GroupEmployee" , new { page = 1})">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 Nhóm nhân viên
                             </a>

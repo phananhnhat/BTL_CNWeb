@@ -14,5 +14,11 @@
         }
    
         <li class="active">@Html.ActionLink("Đăng xuất", "LogOut", "Login")</li>
+        <li>
+            <div style="background-color: black; display: inline;">
+                <img style="" src="~/Content/images/f_icon.png" alt="">
+            </div>
+            <a style="display: inline;" href="@Url.Action("Order", "HomePage")">Giỏ hàng</a>
+        </li>
     </ul>
 </div>

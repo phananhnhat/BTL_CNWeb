@@ -46,6 +46,21 @@ namespace BTLCongNgheWeb_Version2.Dao
             //List<GroupEmployee> result = db.Database.SqlQuery<GroupEmployee>("LoginEmployee @Login @Password").ToList();
             return list;
         }
+        public int CountOrder()
+        {
+            int res = db.Employees.Count();
+            return res;
+        }
+        public List<GroupEmployee> ListEmployee_GetPage(int RequiredPage, int RecordsPerPage)
+        {
+            object[] SqlParams = 
+            {
+                new SqlParameter("@RequiredPage",RequiredPage),
+                 new SqlParameter("@RecordsPerPage",RecordsPerPage)
+            };
+            var result = db.Database.SqlQuery<GroupEmployee>("GroupEmployee_GetPage @RequiredPage,@RecordsPerPage", SqlParams).ToList<GroupEmployee>();
+            return result;
+        }
         public IQueryable<Authorization> ListAuthorization(int GroupEmloyeeID)
         {
             var list = (from s in db.Authorizations

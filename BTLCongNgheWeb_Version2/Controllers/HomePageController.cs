@@ -59,17 +59,38 @@ namespace BTLCongNgheWeb_Version2.Controllers
         }
         public ActionResult Order()
         {
-             
-            //ShopingCart donhang = (ShopingCart)Session["Order"];
+            CustomerDao cus_dao = new CustomerDao();
             ShopingCart donhang = new ShopingCart();
+            donhang.listItem = new List<CardItem>();
             donhang.AddCard(new CardItem(1, "aaaaaa", 3, 32323));
-            donhang.AddCard(new CardItem(2, "vvvvvvv", 3, 32323));
-            donhang.AddCard(new CardItem(3, "bbbbb", 3, 32323));
-            donhang.AddCard(new CardItem(4, "eeeee", 3, 32323));
-            donhang.AddCard(new CardItem(5, "dddd", 3, 32323));
-            donhang.AddCard(new CardItem(6, "gggggg", 3, 32323));
-            donhang.AddCard(new CardItem(7, "fffff", 3, 32323));
-            return View("Order",donhang);
+            donhang.AddCard(new CardItem(4, "vvvvvvv", 3, 32323));
+            donhang.AddCard(new CardItem(5, "bbbbb", 3, 32323));
+            donhang.AddCard(new CardItem(6, "eeeee", 3, 32323));
+            donhang.AddCard(new CardItem(7, "dddd", 3, 32323));
+            donhang.AddCard(new CardItem(8, "gggggg", 3, 32323));
+            Session["DonHang"] = donhang;
+            if (Session["UserLogin"] != null)
+            {
+                Customer user_login = cus_dao.FindByID(((UserLogin)Session["UserLogin"]).ID);
+                donhang.CustomerID = user_login.ID;
+                donhang.TenKhachHang = user_login.Name;
+                donhang.SDTLienLac = user_login.NumberPhone;
+                donhang.DiaChiGiaoHang = user_login.Address;    
+            }
+            return View("Order", donhang);
+        }
+        public ActionResult OrderAdd(ShopingCart shop_cart,string ngayhoanthanh)
+        {
+            shop_cart.NgayHoanThanh = DateTime.Parse(ngayhoanthanh);
+            shop_cart.listItem = ((ShopingCart)Session["DonHang"]).listItem;
+            OrderDao order_dao = new OrderDao();
+
+            int x = shop_cart.listItem.Count();
+            order_dao.Add(shop_cart);
+            Session["DonHang"] = null;
+            ViewBag.nhon = ngayhoanthanh;
+            ViewBag.x = x;
+            return View("test", shop_cart);
         }
 	}
 }

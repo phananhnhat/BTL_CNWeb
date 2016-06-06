@@ -15,6 +15,10 @@ namespace BTLCongNgheWeb_Version2.Dao
         {
             db = new MyClassDbContent();
         }
+        public Customer FindByID(int id)
+        {
+            return db.Customers.Find(id);
+        }
         public int InsertCustomer(Customer customer)
          {
              object[] SqlParams = 
@@ -29,5 +33,21 @@ namespace BTLCongNgheWeb_Version2.Dao
              int result = db.Database.SqlQuery<int>("Customer_Add", SqlParams).SingleOrDefault();
              return result;
          }
+        public int GetIDByLogin(string login)
+        {
+            var list_id = (from s in db.Customers
+                      where s.Login == login
+                      select s.ID);
+            int id = 0;
+            foreach (int item in list_id)
+            {
+                id = item;
+            }
+            return id;
+        }
+        public string GetNameByID(int id)
+        {
+            return db.Customers.Find(id).Name;
+        }
     }
 }

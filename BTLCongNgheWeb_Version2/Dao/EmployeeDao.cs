@@ -21,10 +21,26 @@ namespace BTLCongNgheWeb_Version2.Dao
             db.SaveChanges();
             return employee.ID;
         }
+
         public IQueryable<Employee> Employees()
         {
             //get { return db.Offices; }
             return db.Employees;
+        }
+        public int CountEmployee()
+        {
+            int res = db.Employees.Count();
+            return res;
+        }
+        public List<Employee> ListEmployee_GetPage(int RequiredPage, int RecordsPerPage)
+        {
+            object[] SqlParams = 
+            {
+                new SqlParameter("@RequiredPage",RequiredPage),
+                 new SqlParameter("@RecordsPerPage",RecordsPerPage)
+            };
+            var result = db.Database.SqlQuery<Employee>("Employee_GetPage @RequiredPage,@RecordsPerPage", SqlParams).ToList<Employee>();
+            return result;
         }
         public IQueryable<Employee> ListEmployee()
         {

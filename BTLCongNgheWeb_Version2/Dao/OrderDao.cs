@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using BTLCongNgheWeb_Version2.Entity;
 using BTLCongNgheWeb_Version2.Dao;
+using BTLCongNgheWeb_Version2.Models;
 using System.Data.SqlClient;
 namespace BTLCongNgheWeb_Version2.Dao
 {
@@ -30,7 +31,7 @@ namespace BTLCongNgheWeb_Version2.Dao
             int res = db.Orders.Count();
             return res;
         }
-        public List<Order> ListOrder_Paging(int RequiredPage,int RecordsPerPage)
+        public List<Order> ListOrder_Paging(int RequiredPage, int RecordsPerPage)
         {
             object[] SqlParams = 
             {
@@ -66,6 +67,36 @@ namespace BTLCongNgheWeb_Version2.Dao
             {
                 db.Orders.Remove(order);
                 db.SaveChanges();
+            }
+            db.SaveChanges();
+        }
+        public void Add(ShopingCart shop)
+        {
+            Order order = new Order();
+            order.ID = shop.CustomerID;
+            order.TenKhachHang = shop.TenKhachHang;
+            order.DiaChiGiaoHang = shop.DiaChiGiaoHang;
+            order.NgayNhanYeuCau = DateTime.Now;
+            order.NgayHoanThanh = shop.NgayHoanThanh;
+            order.SDTLienLac = shop.SDTLienLac;
+            db.Orders.Add(order);
+            db.SaveChanges();
+            foreach (CardItem item in shop.listItem)
+            {
+                CF_Orders_Products cf_order_product = new CF_Orders_Products();
+                cf_order_product.OrderID = order.ID;
+                cf_order_product.Qty = item.so_luong;
+                cf_order_product.ProductID = item.id;
+                cf_order_product.Price = item.gia;
+                db.CF_Orders_Products.Add(cf_order_product);
+                //object[] SqlParams = 
+                //     {
+                //        new SqlParameter("@OrderID",39),
+                //        new SqlParameter("@ProductID",item.id),
+                //        new SqlParameter("@Qty",item.so_luong),
+                //        new SqlParameter("@Price",item.gia)
+                //     };
+                //db.Database.ExecuteSqlCommand("CF_Orders_Products_Add @OrderID,@ProductID,@Qty,@Price", SqlParams);
             }
             db.SaveChanges();
         }

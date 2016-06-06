@@ -42,14 +42,14 @@ namespace BTLCongNgheWeb_Version2.Controllers
             }
             else if (login_dao.Login(name, password) == 2)
             {
-                EmployeeDao employee_dao = new EmployeeDao();
+                CustomerDao cus_dao = new CustomerDao();
                 UserLogin userlogin = new UserLogin();
                 userlogin.Type = 2;
-                userlogin.ID = 10;
+                userlogin.ID = cus_dao.GetIDByLogin(name);
                 userlogin.Login = name;
-                userlogin.Name = "Rất tuyệt vời";
+                userlogin.Name = cus_dao.GetNameByID(userlogin.ID);
                 Session["UserLogin"] = userlogin;
-                return RedirectToAction("HomePage", "HomePage"); // Chức năng này chưa làm
+                return RedirectToAction("HomePage", "HomePage"); 
             } else
             {
                 ModelState.AddModelError("loitaikhoan", "Tài khoản hoặc mật khẩu không chính xác");

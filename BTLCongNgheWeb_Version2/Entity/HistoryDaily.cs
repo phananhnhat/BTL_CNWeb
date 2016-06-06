@@ -6,8 +6,7 @@ namespace BTLCongNgheWeb_Version2.Entity
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Counter")]
-    public partial class Counter
+    public partial class HistoryDaily
     {
         public int ID { get; set; }
 
