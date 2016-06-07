@@ -1,4 +1,6 @@
-﻿@model IEnumerable<BTLCongNgheWeb_Version2.Entity.Category>
+﻿@model PagedList.PagedList<BTLCongNgheWeb_Version2.Entity.Category>
+@using PagedList.Mvc;
+
 @{
      ViewBag.Title = "List";
      Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
@@ -11,26 +13,26 @@
 </div>
 
 <p>
-    <a href="/Admin/Catgories/Add" class="btn btn-primary">CREATE NEW</a>
+    <a href="/Admin/Category/Add" class="btn btn-primary">CREATE NEW</a>
 </p>
 <div class="table-responsive table-bordered">
     <table class="table">
         <thead style="background-color: #d9edf7">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.ID)
+                    @Html.DisplayName("ID")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                    @Html.DisplayName("Tên Loại Hàng Hóa")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Position)
+                    @Html.DisplayName("Vị Trí")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Descriptions)
+                    @Html.DisplayName("Miêu Tả")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Actives)
+                    @Html.DisplayName("Kích Hoạt")
                 </th>
                 <th></th>
             </tr>
@@ -63,4 +65,5 @@
 
         </tbody>
     </table>
+    @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
 </div>

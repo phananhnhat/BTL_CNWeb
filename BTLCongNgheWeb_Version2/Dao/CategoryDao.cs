@@ -5,6 +5,9 @@ using System.Web;
 using BTLCongNgheWeb_Version2.Entity;
 using BTLCongNgheWeb_Version2.Dao;
 using System.Data.SqlClient;
+using PagedList.Mvc;
+using PagedList;
+
 namespace BTLCongNgheWeb_Version2.Dao
 {
     public class CategoryDao
@@ -17,6 +20,7 @@ namespace BTLCongNgheWeb_Version2.Dao
         public IQueryable<Category> ListCategory()
         {
             var res = (from s in db.Categories
+                       orderby s.Position 
                        select s);
             return res;
         }
@@ -64,6 +68,11 @@ namespace BTLCongNgheWeb_Version2.Dao
         public Category FindCatById(int id)
         {
             return db.Categories.Find(id);
+        }
+
+        public IEnumerable<Category> ListCategory(int page, int pageSize)
+        {
+            return db.Categories.OrderBy(x => x.ID).ToPagedList(page, pageSize);
         }
 
         //public IQueryable<Category> FindCategories(int Code)

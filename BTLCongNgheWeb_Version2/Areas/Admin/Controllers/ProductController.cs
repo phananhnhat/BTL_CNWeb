@@ -11,13 +11,13 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
     {
         //
         // GET: /Admin_Product_/
-        public ActionResult List()
+        public ActionResult List(int page = 1, int pageSize = 5)
         {
             ProductDao dao = new ProductDao();
             // IQueryable<Office> Offices = dao.Offices;
-            IQueryable<Product> p = dao.ListProduct();
-
-            return View("List", p);
+            //IQueryable<Product> p = dao.ListProduct();
+            var list = dao.ListProduct(page, pageSize);
+            return View("List", list);
         }
 
         public ActionResult Add()

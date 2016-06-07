@@ -3,13 +3,14 @@
 @using BTLCongNgheWeb_Version2.Entity
 @using BTLCongNgheWeb_Version2.Models
 
+
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_HomePage.cshtml";
 }
 @section details_product_slider
 {
-    <script src="~/HomePage/js/jquery.jscrollpane.min.js"></script>
+    <script src="~/Scripts/js/jquery.jscrollpane.min.js"></script>
     <script type="text/javascript" id="sourcecode">
         $(function () {
             $('.scroll-pane').jScrollPane();
@@ -17,8 +18,8 @@
     </script>
     <!----details-product-slider--->
     <!-- Include the Etalage files -->
-    <link href="~/HomePage/css/etalage.css" rel="stylesheet" />
-    <script src="~/HomePage/js/jquery.etalage.min.js"></script>
+    <link href="~/Content/css/etalage.css" rel="stylesheet" />
+    <script src="~/Scripts/js/jquery.etalage.min.js"></script>
     <!-- Include the Etalage files -->
     <script>
         jQuery(document).ready(function ($) {
@@ -44,7 +45,7 @@
 <div class="single">
     <div class="wrap">
 
-        <div class="cont span_2_of_3">
+        <div class="cont span_2_of_3" style="margin-left: 10%;">
             <div class="labout span_1_of_a1">
                 <!-- start product_slider -->
                 <ul id="etalage">
@@ -66,7 +67,7 @@
 
                 <div class="price_single">
                     @*<span class="reducedfrom">$66.00</span>*@
-                    <span class="actual">@Model.Price VND</span><a href="#">click for offer</a>
+                    <span class="actual">@Model.Price VND</span>
                 </div>
                 @*<ul class="options">
                         <h4 class="m_9">Select a Size</h4>
@@ -77,14 +78,38 @@
                         <div class="clear"></div>
                     </ul>*@
                 <div class="btn_form">
-                    <form>
-                        <input type="submit" value="buy now" title="">
-                    </form>
+                    <a href="/HomePage/AddOrder/@Model.ID" style="    font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    display: inline-block;
+    font-size: 0.85em;
+    padding: 10px 34px;
+    background: #555;
+    border-bottom: 4px solid #1D1C1C;
+    color: #FFF;
+    text-transform: uppercase;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;">Thêm vào giỏ hàng</a>
+                    @*<a href="@Url.Action("AddOrder", "HomePage", new { id = @Model.ID})">Thêm vào giỏ hàng</a>
+                                        <input type="submit" value="buy now" title="" style="    font-family: 'Open Sans', sans-serif;
+                        cursor: pointer;
+                        border: none;
+                        outline: none;
+                        display: inline-block;
+                        font-size: 0.85em;
+                        padding: 10px 34px;
+                        background: #555;
+                        border-bottom: 4px solid #1D1C1C;
+                        color: #FFF;
+                        text-transform: uppercase;
+                        -webkit-transition: all 0.3s ease-in-out;
+                        -moz-transition: all 0.3s ease-in-out;
+                        -o-transition: all 0.3s ease-in-out;
+                        transition: all 0.3s ease-in-out;">*@
                 </div>
-                <ul class="add-to-links">
-
-                    <li><img src="~/HomePage/images/wish.png" /><a href="#">Add to wishlist</a></li>
-                </ul>
                 <p class="m_desc">@Model.Description</p>
 
                 <div class="social_single">
@@ -158,17 +183,205 @@
 
                 });
             </script>
-            <script src="~/HomePage/js/jquery.flexisel.js"></script>
+            <script src="~/Scripts/js/jquery.flexisel.js"></script>
+
             <div class="toogle">
-                <h3 class="m_3">Product Details</h3>
-                <p class="m_text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+                <h3 class="m_3">COMMENTS</h3>
+                <div id="left_Static" class="rsidebar span_1_of_left" style="text-align: center;">
+                    <img id="img_Static" style="height: 50px;" src="~/Content/images/user_comment.png">
+                </div>
+
+                @using (Html.BeginForm("AddCommentAction", "HomePage"))
+                {
+                    <div id="center_Static" class="cont span_2_of_3">
+                        <input id="ProductIID" name="ProductIID" value="@Model.ID" style="visibility: hidden;height: 0px;">
+                        <textarea id="ContentAddComment" name="ContentAddComment" class="form-control1" rows="4" placeholder="Enter your content" style="width: 100%; padding: 0px 0px 0px 15px;font-size: 14px;border: 2px solid #2a589a;border-radius: 8px;transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;"></textarea>
+
+                        <input type="submit" value="Comment" id="btn_Add_Comment" style="
+                                    margin-top : 5px;
+					                width: 20%;
+					                padding: 5px 5px 5px 5px;
+					                font-size: 14px;
+					                border: 2px solid #2a589a;
+					                border-radius: 8px;
+					                color: white;
+					                background-color: #2a589a;
+				                ">
+                    </div>
+                }
+
+                <div id="ke_Ngang" style="border: 1px solid #2a589a;margin-top: 143px;margin-right: -20px;"></div>
+                @foreach (ViewComment p11 in @ViewBag.Comment)
+                {
+
+                    <div id="div_@p11.ID" style="height:110px; border-bottom: 1px solid #2a589a;">
+                        <div class="rsidebar span_1_of_left" style="text-align: center;">
+                            <img style="height: 50px;" src="~/Content/images/user_comment.png">
+                            <div>@p11.NameCustomer</div>
+                        </div>
+                        <div class="cont span_2_of_3">
+
+
+                            <form action="/HomePage/UpdateCommentAction" method="post" style="height: 0px;" id="form_@p11.ID">
+                                <input id="IDComment" name="IDComment" value="@p11.ID" style="visibility: hidden;height: 0px;">
+                                <input id="ProductIID" name="ProductIID" value="@Model.ID" style="visibility: hidden;height: 0px;">
+                                <textarea id="ContentComment_@p11.ID" name="ContentComment_A" class="form-control1" rows="4" placeholder="Enter your content" style="visibility: hidden; height: 0px; width: 100%; padding: 0px 0px 0px 15px; font-size: 14px; border: 2px solid #2a589a; border-radius: 8px; transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;">@p11.ContentComment</textarea>
+
+                                <input type="submit" value="Lưu" id="Save_@p11.ID" style="
+                                    visibility : hidden;
+                                    height : 0px;
+                                    margin-top : 5px;
+					                width: 15%;
+					                padding: 5px 5px 5px 5px;
+					                font-size: 14px;
+					                border: 2px solid #2a589a;
+					                border-radius: 8px;
+					                color: white;
+					                background-color: #2a589a;
+				                ">
+                                <a id="Cancle_@p11.ID" style="
+                                    visibility : hidden;
+                                    height : 0px;
+                                    margin-top : 5px;
+					                width: 20%;
+					                padding: 5px 5px 5px 5px;
+					                font-size: 14px;
+					                border: 2px solid #2a589a;
+					                border-radius: 8px;
+					                color: white;
+					                background-color: #2a589a;
+				                    ">Hủy</a>
+
+                            </form>
+
+
+                            <div id="Content_Comment_@p11.ID">@p11.ContentComment</div>
+
+                            <input type="submit" value="Sửa" id="Edit_@p11.ID" style="
+                                    margin-top : 5px;
+					                width: 10%;
+					                padding: 5px 5px 5px 5px;
+					                font-size: 14px;
+					                border: 2px solid #2a589a;
+					                border-radius: 8px;
+					                color: white;
+					                background-color: #2a589a;
+				                ">
+                            <a href="/HomePage/DeleteCommentAction/@p11.ID" id="Delete_@p11.ID" style=" margin-top: 5px; width: 10%; padding: 5px 5px 5px 5px; font-size: 14px; border: 2px solid #2a589a; border-radius: 8px; color: white; background-color: #2a589a; ">Xóa</a>
+
+                        </div>
+                    </div>
+
+
+
+                    <script>
+                        $('#Edit_@p11.ID').on('click', function (e) {
+                            document.getElementById("div_@p11.ID").style.height = "165px";
+
+                            document.getElementById("form_@p11.ID").style.height = "auto";
+
+                            document.getElementById("ContentComment_@p11.ID").style.height = "auto";
+                            document.getElementById("ContentComment_@p11.ID").style.visibility = "inherit";
+
+                            document.getElementById("Save_@p11.ID").style.height = "auto";
+                            document.getElementById("Save_@p11.ID").style.visibility = "inherit";
+
+                            document.getElementById("Cancle_@p11.ID").style.height = "auto";
+                            document.getElementById("Cancle_@p11.ID").style.visibility = "inherit";
+
+                            document.getElementById("Content_Comment_@p11.ID").style.height = "0px";
+                            document.getElementById("Content_Comment_@p11.ID").style.visibility = "hidden";
+
+                            document.getElementById("Edit_@p11.ID").style.height = "0px";
+                            document.getElementById("Edit_@p11.ID").style.visibility = "hidden";
+
+                            document.getElementById("Delete_@p11.ID").style.height = "0px";
+                            document.getElementById("Delete_@p11.ID").style.visibility = "hidden";
+
+                            document.getElementById("left_Static").style.height = "0px";
+                            document.getElementById("left_Static").style.visibility = "hidden";
+
+                            document.getElementById("img_Static").style.height = "0px";
+                            document.getElementById("img_Static").style.visibility = "hidden";
+
+                            document.getElementById("center_Static").style.height = "0px";
+                            document.getElementById("center_Static").style.visibility = "hidden";
+
+                            document.getElementById("ContentAddComment").style.height = "0px";
+                            document.getElementById("ContentAddComment").style.visibility = "hidden";
+
+                            document.getElementById("btn_Add_Comment").style.height = "0px";
+                            document.getElementById("btn_Add_Comment").style.visibility = "hidden";
+
+                            document.getElementById("ke_Ngang").style.marginTop = "0px";
+
+                            @*@foreach (ViewComment p12 in @ViewBag.Comment)
+                                                   {
+                                                      if (p11.ID != p12.ID)
+                                                      {
+                                                          readPage();
+                                                      }
+                                                    }*@
+                        });
+
+                        $('#Cancle_@p11.ID').on('click', function (e) {
+                            document.getElementById("div_@p11.ID").style.height = "110px";
+
+                            document.getElementById("form_@p11.ID").style.height = "0px";
+
+                            document.getElementById("ContentComment_@p11.ID").style.height = "0px";
+                            document.getElementById("ContentComment_@p11.ID").style.visibility = "hidden";
+
+                            document.getElementById("Save_@p11.ID").style.height = "0px";
+                            document.getElementById("Save_@p11.ID").style.visibility = "hidden";
+
+                            document.getElementById("Cancle_@p11.ID").style.height = "0px";
+                            document.getElementById("Cancle_@p11.ID").style.visibility = "hidden";
+
+                            document.getElementById("Content_Comment_@p11.ID").style.height = "auto";
+                            document.getElementById("Content_Comment_@p11.ID").style.visibility = "inherit";
+
+                            document.getElementById("Edit_@p11.ID").style.height = "auto";
+                            document.getElementById("Edit_@p11.ID").style.visibility = "inherit";
+
+                            document.getElementById("Delete_@p11.ID").style.height = "auto";
+                            document.getElementById("Delete_@p11.ID").style.visibility = "inherit";
+
+                            document.getElementById("left_Static").style.height = "auto";
+                            document.getElementById("left_Static").style.visibility = "inherit";
+
+                            document.getElementById("img_Static").style.height = "50px";
+                            document.getElementById("img_Static").style.visibility = "inherit";
+
+                            document.getElementById("center_Static").style.height = "auto";
+                            document.getElementById("center_Static").style.visibility = "inherit";
+
+                            document.getElementById("ContentAddComment").style.height = "auto";
+                            document.getElementById("ContentAddComment").style.visibility = "inherit";
+
+                            document.getElementById("btn_Add_Comment").style.height = "auto";
+                            document.getElementById("btn_Add_Comment").style.visibility = "inherit";
+
+                            document.getElementById("ke_Ngang").style.marginTop = "143px";
+
+                        });
+
+
+
+
+                    </script>
+
+                }
+
             </div>
-            <div class="toogle">
-                <h3 class="m_3">Product Reviews</h3>
-                <p class="m_text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
-            </div>
+
+
+
+
         </div>
+
+
+
         <div class="clear"></div>
     </div>
 </div>
-

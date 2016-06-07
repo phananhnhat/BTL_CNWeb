@@ -41,6 +41,12 @@ body{
 	-o-transition:all .2s linear; 
 	-ms-transition:all .2s linear;
 }
+
+.new_size_img{
+    height : 173px;
+    width : 250px;
+}
+
 .header-top{
 	background:#fff;
 	padding: 10px 0;

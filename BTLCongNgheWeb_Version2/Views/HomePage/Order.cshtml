@@ -24,6 +24,11 @@
         color: #000;
     }
 </style>
+@if (Model.listItem.Count == 0)
+{ 
+    <p>Bạn không có sản phẩm nào trong giỏ hàng </p>
+}
+else { 
 <div style="margin: 30px 10% 30px 10%;">
     <table>
         <thead>
@@ -53,7 +58,7 @@
                     <td>@i.so_luong</td>
                     <td>@i.gia</td>
                     <td>@thanhtien</td>
-                    <td>Hủy</td>
+                    <td style="text-align:center;"><a href="@Url.Action("DeleteOrderItem", "HomePage", new { id = i.id})">x</a></td>
                 </tr>
             }
             <tr>
@@ -107,4 +112,5 @@
     }
     <div class="clear"></div>
 </div>
+}
 

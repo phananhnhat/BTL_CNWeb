@@ -12,7 +12,7 @@ namespace BTLCongNgheWeb_Version2.Controllers
     {
         //
         // GET: /HomePage/
-        public ActionResult Index()
+        public ActionResult HomePage()
         {
             ProductDao iDao = new ProductDao();
             List<ViewProduct> listImage = iDao.ListViewProduct(6);
@@ -20,9 +20,10 @@ namespace BTLCongNgheWeb_Version2.Controllers
 
             return View();
         }
-
+        public static int _productID;
         public ActionResult Detail(int id)
         {
+            _productID = id;
             ProductDao pDao = new ProductDao();
             Product p = pDao.FindProductByICode(id);
 
@@ -40,35 +41,35 @@ namespace BTLCongNgheWeb_Version2.Controllers
             CategoryDao cDao = new CategoryDao();
             IQueryable<Category> listCates = cDao.ListCategory();
             ViewBag.Category = listCates;
+
+            CommentDao cmDao = new CommentDao();
+            List<ViewComment> listComment = cmDao.ListComment(id);
+            ViewBag.Comment = listComment;
+
             return View(p);
         }
 
-        public ActionResult ListProductByCategory(int id)
+        public ActionResult ListProductByCategory(int id, int soluong)
         {
+            ViewBag.IDCategoryTEST = id;
+            ViewBag.SoLuong = soluong;
+            //int number = 6 * ViewBag.intI;
             CategoryDao cDao = new CategoryDao();
             Category c = cDao.FindCatById(id);
             ViewBag.NameCategory = c.Name;
 
             ProductDao pDao2 = new ProductDao();
-            List<ViewProduct> vp = pDao2.ListProductByCategory(id);
+            List<ViewProduct> vp = pDao2.ListProductByCategory(ViewBag.IDCategoryTEST, ViewBag.SoLuong);
+            List<CountProductByCategory> cpbc = pDao2.CountProductByCategory(ViewBag.IDCategoryTEST);
+            var bbb = cpbc[0].Counts.ToString();
+            ViewBag.CountMaxProduct = int.Parse(bbb);
             return View(vp);
-        }
-        public ActionResult HomePage()
-        {
-            return View();
         }
         public ActionResult Order()
         {
             CustomerDao cus_dao = new CustomerDao();
             ShopingCart donhang = new ShopingCart();
-            donhang.listItem = new List<CardItem>();
-            donhang.AddCard(new CardItem(1, "aaaaaa", 3, 32323));
-            donhang.AddCard(new CardItem(4, "vvvvvvv", 3, 32323));
-            donhang.AddCard(new CardItem(5, "bbbbb", 3, 32323));
-            donhang.AddCard(new CardItem(6, "eeeee", 3, 32323));
-            donhang.AddCard(new CardItem(7, "dddd", 3, 32323));
-            donhang.AddCard(new CardItem(8, "gggggg", 3, 32323));
-            Session["DonHang"] = donhang;
+            donhang = (ShopingCart)Session["DonHang"];
             if (Session["UserLogin"] != null)
             {
                 Customer user_login = cus_dao.FindByID(((UserLogin)Session["UserLogin"]).ID);
@@ -79,18 +80,59 @@ namespace BTLCongNgheWeb_Version2.Controllers
             }
             return View("Order", donhang);
         }
-        public ActionResult OrderAdd(ShopingCart shop_cart,string ngayhoanthanh)
+        public ActionResult AddCommentAction(int ProductIID, string ContentAddComment)
         {
-            shop_cart.NgayHoanThanh = DateTime.Parse(ngayhoanthanh);
-            shop_cart.listItem = ((ShopingCart)Session["DonHang"]).listItem;
-            OrderDao order_dao = new OrderDao();
+            int CustomersID = 1;
+            CommentDao pDao = new CommentDao();
+            pDao.InsertComment(ProductIID, CustomersID, ContentAddComment);
+            string url = "/HomePage/Detail/" + ProductIID.ToString();
+            return Redirect(url);
+        }
+        public ActionResult UpdateCommentAction(int IDComment, int ProductIID, string ContentComment_A)
+        {
+            int CustomersID = 1;
+            CommentDao pDao = new CommentDao();
 
-            int x = shop_cart.listItem.Count();
-            order_dao.Add(shop_cart);
-            Session["DonHang"] = null;
-            ViewBag.nhon = ngayhoanthanh;
-            ViewBag.x = x;
-            return View("test", shop_cart);
+            pDao.UpdateComment(IDComment, ProductIID, CustomersID, ContentComment_A);
+            string url = "/HomePage/Detail/" + ProductIID.ToString();
+            return Redirect(url);
+        }
+        public ActionResult DeleteCommentAction(int id)
+        {
+            CommentDao cmDao = new CommentDao();
+            Comment cm = cmDao.FindCommentById(id);
+            cmDao.DeleteComment(cm);
+            string url = "/HomePage/Detail/" + _productID.ToString();
+            return Redirect(url);
+        }
+        public ActionResult AddOrder(int id)
+        {
+            if (Session["DonHang"] == null)
+            {
+                ShopingCart shop = new ShopingCart();
+                ProductDao pro_dao = new ProductDao();
+                Product pro = pro_dao.FindProductByICode(id);
+                shop.AddCard(new CardItem(id, pro.NameProduct, 1, (int)pro.Price));
+                Session["DonHang"] = shop;
+            }
+            else
+            {
+                ShopingCart shop = (ShopingCart)Session["DonHang"];
+                ProductDao pro_dao = new ProductDao();
+                Product pro = pro_dao.FindProductByICode(id);
+                shop.AddCard(new CardItem(id, pro.NameProduct, 1, (int)pro.Price));
+                Session["DonHang"] = shop;
+            }
+            return RedirectToAction("Order","HomePage");
+        }
+        public ActionResult DeleteOrderItem(int id)
+        {
+            ShopingCart shop = (ShopingCart)Session["DonHang"];
+            ProductDao pro_dao = new ProductDao();
+            Product pro = pro_dao.FindProductByICode(id);
+            shop.DeleteCard(id);
+            Session["DonHang"] = shop;
+            return RedirectToAction("Order", "HomePage");
         }
 	}
 }

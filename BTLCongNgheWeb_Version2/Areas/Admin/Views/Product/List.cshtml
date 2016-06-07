@@ -1,4 +1,6 @@
-﻿@model IEnumerable<BTLCongNgheWeb_Version2.Entity.Product>
+﻿@model PagedList.PagedList<BTLCongNgheWeb_Version2.Entity.Product>
+@using PagedList.Mvc;
+
 @{
       ViewBag.Title = "List";
       Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
@@ -129,6 +131,7 @@
 
         </tbody>
     </table>
+    @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
 </div>
 <script type="text/javascript">
     jQuery(function ($) {

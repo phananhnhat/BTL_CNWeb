@@ -11,11 +11,13 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
     {
         //
         // GET: /Admin_Catgories/
-        public ActionResult List()
+        public ActionResult List(int page = 1, int pageSize = 2)
         {
-            CategoryDao cDao = new CategoryDao();
-            IQueryable<Category> c = cDao.ListCategory();
-            return View("List", c);
+            CategoryDao dao = new CategoryDao();
+            // IQueryable<Office> Offices = dao.Offices;
+            //IQueryable<Product> p = dao.ListProduct();
+            var list = dao.ListCategory(page, pageSize);
+            return View("List", list);
         }
 
         public ActionResult Add()

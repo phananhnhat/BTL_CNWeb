@@ -6,6 +6,9 @@ using BTLCongNgheWeb_Version2.Entity;
 using BTLCongNgheWeb_Version2.Dao;
 using BTLCongNgheWeb_Version2.Models;
 using System.Data.SqlClient;
+using PagedList.Mvc;
+using PagedList;
+
 namespace BTLCongNgheWeb_Version2.Dao
 {
     public class ProductDao
@@ -26,6 +29,11 @@ namespace BTLCongNgheWeb_Version2.Dao
                        where s.CategoriesID == id
                        select s);
             return res;
+        }
+
+        public IEnumerable<Product> ListProduct(int page, int pageSize)
+        {
+            return db.Products.OrderByDescending(x => x.CreateDate).ToPagedList(page, pageSize);
         }
         public IQueryable<Product> ListProduct()
         {
@@ -165,9 +173,16 @@ namespace BTLCongNgheWeb_Version2.Dao
             return res;
         }
 
-        public List<ViewProduct> ListProductByCategory(int id)
+
+        public List<ViewProduct> ListProductByCategory(int id, int number)
         {
-            var res = db.Database.SqlQuery<ViewProduct>("exec FindProductByCategory @ID", new SqlParameter("@ID", id)).ToList();
+            var res = db.Database.SqlQuery<ViewProduct>("exec FindProductByCategory @ID , @number", new SqlParameter("@ID", id), new SqlParameter("@number", number)).ToList();
+            return res;
+        }
+
+        public List<CountProductByCategory> CountProductByCategory(int id)
+        {
+            var res = db.Database.SqlQuery<CountProductByCategory>("exec CountProductByCategory @ID", new SqlParameter("@ID", id)).ToList();
             return res;
         }
     }
