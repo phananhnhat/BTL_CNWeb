@@ -434,7 +434,7 @@
 
                     <ul class="submenu">
                         <li class="">
-                            <a href="tables.html">
+                            <a href="@Url.Action("Detail" , "Thong_Tin")">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 Thông tin
                             </a>
@@ -443,7 +443,7 @@
                         </li>
 
                         <li class="">
-                            <a href="jqgrid.html">
+                            <a href="@Url.Action("Edit", "Thong_Tin")">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 Đổi mật khẩu
                             </a>
@@ -539,7 +539,7 @@
 
                     <ul class="submenu">
                         <li class="">
-                            <a href="@Url.Action("List" , "Employee")">
+                            <a href="#">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 Nhập sản phẩm
                             </a>
@@ -547,7 +547,7 @@
                         </li>
 
                         <li class="">
-                            <a href="@Url.Action("List" , "GroupEmployee")">
+                            <a href="@Url.Action("List" , "Kho_hang_")">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 Kho sản phẩm
                             </a>
@@ -565,11 +565,31 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="">
-                    <a href="widgets.html">
-                        <i class="menu-icon fa fa-list-alt"></i>
-                        <span class="menu-text"> Thống kê | Báo cáo </span>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-list"></i>
+                        <span class="menu-text"> Thống kê </span>
+                        <b class="arrow fa fa-angle-down"></b>
                     </a>
+
                     <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="@Url.Action("HistoryDaily" , "ThongKe")">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Số lượng truy cập
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+
+                        <li class="">
+                            <a href="">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Số lượt xem và mua
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
                 </li>
 
             </ul><!-- /.nav-list -->

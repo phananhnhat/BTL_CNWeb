@@ -1,0 +1,49 @@
+﻿@model IEnumerable<BTLCongNgheWeb_Version2.Models.Kho_hang>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Kho hàng</h2>
+
+@*<p>
+        <a href="/Admin/Catgories/Add" class="btn btn-primary">CREATE NEW</a>
+    </p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProdutsID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NameProduct)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qty)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdutsID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameProduct)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty)
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>*@
+        </tr>
+    }
+
+</table>
+
+

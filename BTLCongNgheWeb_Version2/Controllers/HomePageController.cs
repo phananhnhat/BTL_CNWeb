@@ -76,7 +76,7 @@ namespace BTLCongNgheWeb_Version2.Controllers
                 donhang.CustomerID = user_login.ID;
                 donhang.TenKhachHang = user_login.Name;
                 donhang.SDTLienLac = user_login.NumberPhone;
-                donhang.DiaChiGiaoHang = user_login.Address;    
+                donhang.DiaChiGiaoHang = user_login.Address;
             }
             return View("Order", donhang);
         }
@@ -105,7 +105,7 @@ namespace BTLCongNgheWeb_Version2.Controllers
             string url = "/HomePage/Detail/" + _productID.ToString();
             return Redirect(url);
         }
-        public ActionResult AddOrder(int id)
+        public ActionResult AddItemOrder(int id)
         {
             if (Session["DonHang"] == null)
             {
@@ -123,7 +123,20 @@ namespace BTLCongNgheWeb_Version2.Controllers
                 shop.AddCard(new CardItem(id, pro.NameProduct, 1, (int)pro.Price));
                 Session["DonHang"] = shop;
             }
-            return RedirectToAction("Order","HomePage");
+            return RedirectToAction("Order", "HomePage");
+        }
+        public ActionResult AddOrder(ShopingCart shop_new, string ngayhoanthanh)
+        {
+            ShopingCart shop = (ShopingCart)Session["DonHang"];
+            OrderDao order_dao = new OrderDao();
+            shop.TenKhachHang = shop_new.TenKhachHang;
+            shop.DiaChiGiaoHang = shop_new.DiaChiGiaoHang;
+            shop.TenKhachHang = shop_new.TenKhachHang;
+           // shop.NgayHoanThanh = DateTime.Now;
+            shop.NgayHoanThanh = DateTime.Parse(ngayhoanthanh);
+            order_dao.Add(shop);
+            Session["DonHang"] = null;
+            return RedirectToAction("HomePage", "HomePage");
         }
         public ActionResult DeleteOrderItem(int id)
         {
@@ -134,5 +147,9 @@ namespace BTLCongNgheWeb_Version2.Controllers
             Session["DonHang"] = shop;
             return RedirectToAction("Order", "HomePage");
         }
-	}
+        public ActionResult SudungRenderPage()
+        {
+            return View();
+        }
+    }
 }

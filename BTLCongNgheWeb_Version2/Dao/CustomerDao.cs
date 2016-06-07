@@ -30,7 +30,7 @@ namespace BTLCongNgheWeb_Version2.Dao
                 new SqlParameter("@Login",customer.Login),
                 new SqlParameter("@Password",customer.Password)
             };
-             int result = db.Database.SqlQuery<int>("Customer_Add", SqlParams).SingleOrDefault();
+             int result = db.Database.SqlQuery<int>("Customer_Add @Name,@NumberPhone,@Address,@Email,@Login,@Password", SqlParams).SingleOrDefault();
              return result;
          }
         public int GetIDByLogin(string login)

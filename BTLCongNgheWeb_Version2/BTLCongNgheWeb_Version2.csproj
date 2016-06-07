@@ -176,9 +176,12 @@
     <Compile Include="Areas\Admin\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ErrorController.cs" />
     <Compile Include="Areas\Admin\Controllers\GroupEmployeeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Kho_hang_Controller.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\ShoppingCardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Thong_TinController.cs" />
     <Compile Include="Areas\Admin\Controllers\WareHouseController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -193,11 +196,13 @@
     <Compile Include="Dao\EmployeeDao.cs" />
     <Compile Include="Dao\GroupEmployeeDao.cs" />
     <Compile Include="Dao\HistoryDailyDao.cs" />
+    <Compile Include="Dao\Kho_hang_Dao.cs" />
     <Compile Include="Dao\LoginDao.cs" />
     <Compile Include="Dao\OrderDao.cs" />
     <Compile Include="Dao\OrderItem.cs" />
     <Compile Include="Dao\ProductDao.cs" />
     <Compile Include="Dao\ProductImageDao.cs" />
+    <Compile Include="Dao\Thong_tin_Dao.cs" />
     <Compile Include="Entity\Access.cs" />
     <Compile Include="Entity\Authorization.cs" />
     <Compile Include="Entity\Category.cs" />
@@ -221,6 +226,7 @@
     <Compile Include="Models\CardItem.cs" />
     <Compile Include="Models\CountProductByCategory.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Kho_hang.cs" />
     <Compile Include="Models\ShopingCart.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Models\ViewComment.cs" />
@@ -1578,6 +1584,11 @@
     <Content Include="Areas\Admin\Views\Product\List.cshtml" />
     <Content Include="Areas\Admin\Views\Account\ChangePassword.cshtml" />
     <Content Include="Areas\Admin\Views\Order\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Thong_Tin\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Thong_Tin\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Thong_Tin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Kho_hang_\List.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKe\HistoryDaily.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1657,7 +1668,6 @@
     <Content Include="Views\HomePage\HomePage.cshtml" />
     <Content Include="Views\Shared\CustomerPartial.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
-    <Content Include="Views\Shared\Test.cshtml" />
     <Content Include="Views\Login\Test.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Register\View1.cshtml" />
@@ -1667,6 +1677,9 @@
     <Content Include="Views\HomePage\Order.cshtml" />
     <Content Include="Views\Shared\_NewsProduct.cshtml" />
     <Content Include="Views\Shared\_SlideProduct_Home.cshtml" />
+    <Content Include="Views\Shared\RenderPage1.cshtml" />
+    <Content Include="Views\HomePage\SudungRenderPage.cshtml" />
+    <Content Include="Views\HomePage\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

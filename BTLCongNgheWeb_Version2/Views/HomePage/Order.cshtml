@@ -24,9 +24,11 @@
         color: #000;
     }
 </style>
-@if (Model.listItem.Count == 0)
+@if (Model ==null || Model.listItem.Count == 0 )
 { 
-    <p>Bạn không có sản phẩm nào trong giỏ hàng </p>
+    <div style="margin: 30px 10% 30px 10%;">
+        <p>Bạn không có sản phẩm nào trong giỏ hàng </p>
+    </div>
 }
 else { 
 <div style="margin: 30px 10% 30px 10%;">
@@ -72,7 +74,7 @@ else {
     </table>
 </div>
 <div class="wrap" style="width:50%; margin-bottom:30px">
-    @using (Html.BeginForm("OrderAdd", "HomePage"))
+    @using (Html.BeginForm("AddOrder", "HomePage"))
     {
         <div class="login-title">
             Thông tin khách hàng
@@ -105,6 +107,21 @@ else {
                 </p>
                 <p>
                     <input type="submit" value="Gửi đơn hàng" />
+                    <a href="/HomePage/HomePage" style="    font-family: 'Open Sans', sans-serif;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                display: inline-block;
+                font-size: 0.85em;
+                padding: 10px 34px;
+                background: #555;
+                border-bottom: 4px solid #1D1C1C;
+                color: #FFF;
+                text-transform: uppercase;
+                -webkit-transition: all 0.3s ease-in-out;
+                -moz-transition: all 0.3s ease-in-out;
+                -o-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;">Tiếp tục mua hàng</a>
                 </p>
             </div>
 

@@ -129,35 +129,3 @@ namespace BTLCongNgheWeb_Version2.Areas.Admin.Controllers
 
 
 
-
-   //@{
-   //                                 int sotrang = ViewBag.Count / 10 + 1;
-   //                                 int index = ViewBag.RequiredPage;
-   //                                 if (index == 1)
-   //                                 {
-   //                                     <li class="paginate_button previous disabled" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous"><a href="#">Trang trước</a></li>
-   //                                 }
-   //                                 else
-   //                                 {
-   //                                     <li class="paginate_button previous" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous"><a href="@Url.Action("List", "Order", new { RequiredPage = index - 1 })">Trang trước</a></li>
-   //                                 }
-   //                                 for (int i = 1; i <= sotrang; i++)
-   //                                 {
-   //                                     if (i == index)
-   //                                     {
-   //                                         <li class="paginate_button active" aria-controls="dynamic-table" tabindex="0"><a href="#">@i</a></li>
-   //                                     }
-   //                                     else
-   //                                     {
-   //                                         <li class="paginate_button " aria-controls="dynamic-table" tabindex="0"><a href="@Url.Action("List", "Order", new { RequiredPage = i })">@i</a></li>
-   //                                     }
-   //                                 }
-   //                                 if (index == sotrang)
-   //                                 {
-   //                                     <li class="paginate_button next disabled" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_next"><a href="#">Trang sau</a></li>
-   //                                 }
-   //                                 else
-   //                                 {
-   //                                     <li class="paginate_button next" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_next"><a href="@Url.Action("List", "Order", new { RequiredPage = index + 1 })">Trang sau</a></li>
-   //                                 }
-   //                             }

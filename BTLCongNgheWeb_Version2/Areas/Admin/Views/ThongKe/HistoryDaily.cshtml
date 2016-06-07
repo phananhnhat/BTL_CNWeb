@@ -1,0 +1,31 @@
+﻿@model IEnumerable<BTLCongNgheWeb_Version2.Entity.HistoryDaily>
+@{
+    ViewBag.Title = "Add1";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+@section Link {
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">Admin</a>
+        </li>
+
+        <li>
+            <a href="#">Thống kê</a>
+        </li>
+        <li class="active">Lịch sử truY cập</li>
+    </ul><!-- /.breadcrumb -->
+}
+<table class="table">
+    <tr>
+        <th>Ngày</th>
+        <th>Số lượng truy cập</th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+           <td>@Html.DisplayFor(modelItem => item.DateAccess)</td>
+           <td>@Html.DisplayFor(modelItem => item.Number)</td>
+        </tr>
+    }
+</table>
